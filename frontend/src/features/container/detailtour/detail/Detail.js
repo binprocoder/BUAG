@@ -3,6 +3,8 @@ import { Tabs } from 'antd';
 import { StickyContainer, Sticky } from 'react-sticky';
 import 'antd/dist/antd.css';
 import Chitiettour from '../chitiettour/Chitiettour';
+import Danhgia from '../danhgia/Danhgia';
+
 import "./detail.css"
 function Detail(props) {
     const { TabPane } = Tabs;
@@ -19,6 +21,9 @@ function Detail(props) {
                 <Tabs defaultActiveKey="1" renderTabBar={renderTabBar}>
                     <TabPane tab="Chi tiết tour" key="1" >
                         <Chitiettour id={props.id} />
+                    </TabPane>
+                    <TabPane tab="Đánh giá khách hàng" key="6">
+                        <Danhgia id={props.id} />
                     </TabPane>
                 </Tabs>
             </StickyContainer>

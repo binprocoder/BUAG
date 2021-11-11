@@ -11,6 +11,8 @@ import roleReducer from "../features/container/admin/Role/roleSlice";
 import ngaydiReducer from "../features/container/admin/Ngaydi/ngaydiSlice"
 import userroleReducer from "../features/container/admin/header/userroleSlice"
 import inforReducer from "../features/container/dangnhap/dangnhapSlice"
+import binhluanReducer from "../features/container/admin/Binhluan/binhluanSlice"
+import hoadonReducer from "../features/container/admin/Hoadon/hoadonSlice"
 
 const rootReducer = {
   user: userReducer,
@@ -25,6 +27,9 @@ const rootReducer = {
   ngaydis: ngaydiReducer,
   userroles: userroleReducer,
   infor: inforReducer,
+  binhluans: binhluanReducer,
+  hoadons: hoadonReducer,
+
 }
 
 export default configureStore({

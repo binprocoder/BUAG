@@ -23,7 +23,9 @@ import Themdichvu from "../Dichvu/Themdichvu"
 import Role from "../Role/Role";
 import Themrole from '../Role/Themrole';
 import Ngaydi from "..//Ngaydi/Ngaydi";
-
+import Binhluan from "../Binhluan/Binhluan"
+import Chitietbinhluan from '../Binhluan/Chitietbinhluan';
+import Hoadon from "../Hoadon/Hoadon";
 
 export default function Nav() {
     const match = useRouteMatch();
@@ -98,11 +100,20 @@ export default function Nav() {
             <Route exact path={`${match.path}/ngaydi`}  >
                 <Ngaydi />
             </Route>
+            <Route exact path={`${match.path}/hoadon`}  >
+                <Hoadon url={match.url} />
+            </Route>
             <Route exact path={`${match.path}/anh`}  >
                 <Anh url={match.url} />
             </Route>
             <Route exact path={`${match.path}/dichvu`}  >
                 <Dichvu url={match.url} />
+            </Route>
+            <Route exact path={`${match.path}/binhluan`}  >
+                <Binhluan url={match.url} />
+            </Route>
+            <Route path={`${match.path}/binhluan/chitietbinhluan/:id`}  >
+                <Chitietbinhluan />
             </Route>
             <Route exact path={`${match.path}/tour`}  >
                 <Tour url={match.url} />
@@ -193,11 +204,17 @@ export default function Nav() {
             <Menu.Item key="8" icon={state.collapsed === true ? <span className="fas fa-place-of-worship" ></span> : <span className="fas fa-place-of-worship mr-2"></span>}>
                 <Link to={`${match.url}/diadiem`}>Quản lý địa điểm</Link>
             </Menu.Item>
+            <Menu.Item key="9" icon={state.collapsed === true ? <span className="fas fa-comments" ></span> : <span className="fas fa-comments mr-2"></span>}>
+                <Link to={`${match.url}/binhluan`}>Quản lý bình luận</Link>
+            </Menu.Item>
             <Menu.Item key="11" icon={state.collapsed === true ? <span className="fas fa-images" ></span> : <span className="fas fa-images mr-2"></span>}>
                 <Link to={`${match.url}/anh`}>Quản lý ảnh</Link>
             </Menu.Item>
             <Menu.Item key="12" icon={state.collapsed === true ? <span className="fab fa-phoenix-framework" ></span> : <span className="fab fa-phoenix-framework mr-2"></span>}>
                 <Link to={`${match.url}/dichvu`}>Quản lý dịch vụ</Link>
+            </Menu.Item>
+            <Menu.Item key="13" icon={state.collapsed === true ? <span className="fas fa-file-alt" ></span> : <span className="fas fa-file-alt mr-2"></span>}>
+                <Link to={`${match.url}/hoadon`}>Quản lý hoá đơn</Link>
             </Menu.Item>
             <Menu.Item key="14" icon={state.collapsed === true ? <span className="fas fa-user-tag" ></span> : <span className="fas fa-user-tag mr-2"></span>}>
                 <Link to={`${match.url}/role`}>Quản lý phân quyền</Link>

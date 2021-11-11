@@ -1,12 +1,20 @@
 require("dotenv").config()
 var express = require('express');
-var bodyParser = require('body-parser');
+// var bodyParser = require('body-parser');
 var app = express();
 var cors = require('cors');
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+
+
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+app.use(express.urlencoded({
+    extended: true,
+}));
+app.use(express.json());
+
+
 app.get("/", (req, res) => {
     res.send("<h1>Hi</h1>");
 }
@@ -27,6 +35,8 @@ require("./routes/DichvuTour")(app);
 require("./routes/TourLoaitour")(app);
 require("./routes/TourNgaydi")(app);
 require("./routes/TourDiadiem")(app);
+require("./routes/Binhluan")(app);
+require("./routes/Hoadon")(app);
 
 app.use(function (err, req, res, next) {
     res.status(500).send(err)

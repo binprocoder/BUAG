@@ -26,6 +26,9 @@ import { ngaydiData } from "../container/admin/Ngaydi/ngaydiSlice";
 import { tourData } from "../container/admin/Tour/tourSlice";
 import { inforData } from "../container/dangnhap/dangnhapSlice";
 import CreateTour from "../container/createTour/CreateTour";
+import { hoadonData } from "../container/admin/Hoadon/hoadonSlice";
+import { binhluanData } from "../container/admin/Binhluan/binhluanSlice";
+
 export default function NestingExample() {
   const dispatch = useDispatch();
   const actionquocgia = async () => { await dispatch(quocgiaData()) }
@@ -36,6 +39,8 @@ export default function NestingExample() {
   const actionrole = async () => { await dispatch(roleData()) }
   const actionngaydi = async () => { await dispatch(ngaydiData()) }
   const actiontour = async () => { await dispatch(tourData()) }
+  const actionbinhluan = async () => { await dispatch(binhluanData()) }
+  const actionhoadon = async () => { await dispatch(hoadonData()) }
   const actioninfor = async () => { await dispatch(inforData()) }
   useEffect(() => {
 
@@ -48,6 +53,9 @@ export default function NestingExample() {
     actionngaydi();
     actiontour();
     actioninfor();
+    actionbinhluan();
+    actionhoadon();
+    
   }, []);
   return (
     <Router>

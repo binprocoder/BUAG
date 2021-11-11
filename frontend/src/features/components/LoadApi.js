@@ -10,6 +10,9 @@ import { ngaydiData } from "../container/admin/Ngaydi/ngaydiSlice";
 import { tourData } from "../container/admin/Tour/tourSlice";
 import { useEffect } from "react";
 import { useDispatch } from 'react-redux';
+import { hoadonData } from "../container/admin/Hoadon/hoadonSlice";
+import { binhluanData } from "../container/admin/Binhluan/binhluanSlice";
+
 
 export default function LoadApi() {
     const dispatch = useDispatch();
@@ -22,6 +25,9 @@ export default function LoadApi() {
     const actionrole = async () => { await dispatch(roleData()) }
     const actionngaydi = async () => { await dispatch(ngaydiData()) }
     const actiontour = async () => { await dispatch(tourData()) }
+    const actionbinhluan = async () => { await dispatch(binhluanData()) }
+    const actionhoadon = async () => { await dispatch(hoadonData()) }
+
     useEffect(() => {
         actionquocgia();
         actionloaitour();
@@ -32,6 +38,9 @@ export default function LoadApi() {
         actionrole();
         actionngaydi();
         actiontour();
+        actionbinhluan();
+        actionhoadon();
+
     }, [])
 
 }
