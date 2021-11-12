@@ -37,6 +37,10 @@ require("./routes/TourNgaydi")(app);
 require("./routes/TourDiadiem")(app);
 require("./routes/Binhluan")(app);
 require("./routes/Hoadon")(app);
+require("./routes/Tintuc")(app);
+require("./routes/Tag")(app);
+require("./routes/TintucTag")(app);
+
 
 app.use(function (err, req, res, next) {
     res.status(500).send(err)

@@ -6,6 +6,8 @@ import Tournuocngoai from "../container/trangchu/tournuocngoai/Tournuocngoai";
 import Dichvu from "../container/trangchu/dichvu/Dichvu";
 import Footer from "../container/trangchu/footer/Footer";
 import CreateTour from "../container/trangchu/createTour/CreateTour";
+import Tintuc from "../container/trangchu/tintuc/Tintuc";
+
 export class Trangchu extends Component {
 
   render() {
@@ -16,6 +18,7 @@ export class Trangchu extends Component {
         <Tourtrongnuoc />
         <Tournuocngoai />
         <Dichvu />
+        <Tintuc />
         <Footer />
       </div>
     );

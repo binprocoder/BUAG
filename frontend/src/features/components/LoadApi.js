@@ -12,6 +12,8 @@ import { useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { hoadonData } from "../container/admin/Hoadon/hoadonSlice";
 import { binhluanData } from "../container/admin/Binhluan/binhluanSlice";
+import { tintucData } from "../container/admin/tintuc/tintucSlice";
+import { tagData } from "../container/admin/Tag/tagSlice";
 
 
 export default function LoadApi() {
@@ -27,6 +29,8 @@ export default function LoadApi() {
     const actiontour = async () => { await dispatch(tourData()) }
     const actionbinhluan = async () => { await dispatch(binhluanData()) }
     const actionhoadon = async () => { await dispatch(hoadonData()) }
+    const actiontintuc = async () => { await dispatch(tintucData()) }
+    const actiontag = async () => { await dispatch(tagData()) }
 
     useEffect(() => {
         actionquocgia();
@@ -40,6 +44,8 @@ export default function LoadApi() {
         actiontour();
         actionbinhluan();
         actionhoadon();
+        actiontintuc();
+        actiontag();
 
     }, [])
 

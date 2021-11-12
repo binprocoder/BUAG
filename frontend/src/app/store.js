@@ -13,6 +13,9 @@ import userroleReducer from "../features/container/admin/header/userroleSlice"
 import inforReducer from "../features/container/dangnhap/dangnhapSlice"
 import binhluanReducer from "../features/container/admin/Binhluan/binhluanSlice"
 import hoadonReducer from "../features/container/admin/Hoadon/hoadonSlice"
+import tintucReducer from "../features/container/admin/tintuc/tintucSlice"
+import tagReducer from "../features/container/admin/Tag/tagSlice"
+import tintuctagReducer from "../features/container/admin/tintuc/tintuctagSlice"
 
 const rootReducer = {
   user: userReducer,
@@ -29,6 +32,9 @@ const rootReducer = {
   infor: inforReducer,
   binhluans: binhluanReducer,
   hoadons: hoadonReducer,
+  tintucs: tintucReducer,
+  tags: tagReducer,
+  tintuctags: tintuctagReducer,
 
 }
 

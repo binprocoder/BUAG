@@ -28,6 +28,10 @@ import { inforData } from "../container/dangnhap/dangnhapSlice";
 import CreateTour from "../container/createTour/CreateTour";
 import { hoadonData } from "../container/admin/Hoadon/hoadonSlice";
 import { binhluanData } from "../container/admin/Binhluan/binhluanSlice";
+import Listtintuc from "../container/tintuc/listtintuc/Listtintuc";
+import Tintucdetail from "../container/tintuc/tintucdetail/Tintucdetail";
+import { tagData } from "../container/admin/Tag/tagSlice";
+import { tintucData } from "../container/admin/tintuc/tintucSlice";
 
 export default function NestingExample() {
   const dispatch = useDispatch();
@@ -42,6 +46,9 @@ export default function NestingExample() {
   const actionbinhluan = async () => { await dispatch(binhluanData()) }
   const actionhoadon = async () => { await dispatch(hoadonData()) }
   const actioninfor = async () => { await dispatch(inforData()) }
+  const actiontag = async () => { await dispatch(tagData()) }
+  const actiontintuc = async () => { await dispatch(tintucData()) }
+
   useEffect(() => {
 
     actionquocgia();
@@ -55,6 +62,8 @@ export default function NestingExample() {
     actioninfor();
     actionbinhluan();
     actionhoadon();
+    actiontintuc();
+    actiontag();
     
   }, []);
   return (
@@ -95,6 +104,12 @@ export default function NestingExample() {
           </Route>
           <Route path="/tour/:id">
             <Tour />
+          </Route>
+          <Route path="/listtintuc">
+            <Listtintuc />
+          </Route>
+          <Route path="/detail-new/:id">
+            <Tintucdetail />
           </Route>
         </Switch>
       </div>
