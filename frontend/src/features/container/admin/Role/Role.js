@@ -33,28 +33,16 @@ function Role() {
 
     const countRole = (id) => {
         var admin = [];
-        var quanlytintuc = [];
-        var quanlybinhluan = [];
         var quanlytour = [];
-        var bientapvien = [];
         var nguoidung = [];
         for (let i = 0; i < userrole.length; i++) {
             if (userrole[i].roleId === 1) {
                 admin.push(userrole[i]);
             }
             if (userrole[i].roleId === 2) {
-                quanlytintuc.push(userrole[i]);
-            }
-            if (userrole[i].roleId === 3) {
-                quanlybinhluan.push(userrole[i]);
-            }
-            if (userrole[i].roleId === 4) {
                 quanlytour.push(userrole[i]);
             }
-            if (userrole[i].roleId === 5) {
-                bientapvien.push(userrole[i]);
-            }
-            if (userrole[i].roleId === 6) {
+            if (userrole[i].roleId === 3) {
                 nguoidung.push(userrole[i]);
             }
         }
@@ -63,18 +51,9 @@ function Role() {
                 return admin.length;
                 break;
             case 2:
-                return quanlytintuc.length;
-                break;
-            case 3:
-                return quanlybinhluan.length;
-                break;
-            case 4:
                 return quanlytour.length;
                 break;
-            case 5:
-                return bientapvien.length;
-                break;
-            case 6:
+            case 3:
                 return nguoidung.length;
                 break;
         }

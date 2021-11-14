@@ -108,9 +108,6 @@ function ListMenu(props) {
       <Menu.Item key="2">
         <span onClick={showDrawer}>Xem thông tin</span>
       </Menu.Item>
-      <Menu.Item key="4">
-        <Linkrt to="/thongtin/0">Xem lịch sử</Linkrt>
-      </Menu.Item>
       {users ? phanquyen() ?
         <Menu.Item key="3">
           <Linkrt to="/admin" className="nav-link">Quản lý admin</Linkrt>
@@ -341,7 +338,7 @@ function ListMenu(props) {
           <div className="form-group">
             <label htmlFor="">Giới tính</label>
             <select className="form-control" onChange={hangdleGioitinh} >
-              <option value="1">nam</option>
+              <option value="1">Nam</option>
               <option value="0">Nữ</option>
             </select>
           </div>

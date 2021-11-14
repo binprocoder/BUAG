@@ -16,7 +16,7 @@ export default function CreateTour() {
     let diadiem = [];
     if (diadiems) {
         for (let i = 0; i < diadiems.length; i++) {
-            if (diadiems[i].quocgiaId === 1) {
+            if (diadiems[i].quocgiaId === 8) {
                 diadiem.push(diadiems[i])
             }
         }

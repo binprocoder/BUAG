@@ -27,7 +27,7 @@ function Dangky(props) {
                         if (await taikhoanApi.checkEmail(email).then(data => { return data; }) !== null) {
                             message.error("Email đã được sử dụng!");
                         } else {
-                            var UserRoles = [{ roleId: 6 }]
+                            var UserRoles = [{ roleId: 3 }]
                             taikhoanApi.postuser({ name, status, email, password, UserRoles });
                             history.push('/dangnhap')
                         }

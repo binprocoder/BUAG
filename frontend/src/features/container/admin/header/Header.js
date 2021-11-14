@@ -234,7 +234,7 @@ function Header(props) {
                     <div className="form-group">
                         <label htmlFor="">Giới tính</label>
                         <select className="form-control" onChange={hangdleGioitinh} >
-                            <option value="1">nam</option>
+                            <option value="1">Nam</option>
                             <option value="0">Nữ</option>
                         </select>
                     </div>

@@ -30,6 +30,7 @@ require("./routes/Anh")(app);
 require("./routes/Dichvu")(app);
 require("./routes/Role")(app);
 require("./routes/UserRole")(app);
+require("./routes/checkemail")(app);
 require("./routes/Checkuser")(app);
 require("./routes/DichvuTour")(app);
 require("./routes/TourLoaitour")(app);
