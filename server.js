@@ -3,12 +3,12 @@ var express = require('express');
 // var bodyParser = require('body-parser');
 var app = express();
 var cors = require('cors');
+const Stripe = require('stripe');
+const stripe = Stripe('sk_test_51JvilZB36PKJt46mB4ANXnXBOA2jsJ5zCef0EwHRjE07stlFLFP3qAybd28UziINm2mPADme1eZVh6qeav54BNs2009bnwcV67');
 
 app.use(cors());
-
-
-// app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({
     extended: true,
 }));
@@ -19,6 +19,23 @@ app.get("/", (req, res) => {
     res.send("<h1>Hi</h1>");
 }
 )
+
+app.post("/payment", async (req, res) => {
+    const { email, price } = req.body;
+    const paymentIntent = await stripe.paymentIntents.create({
+        amount: price,
+        currency: 'usd',
+        // Verify your integration in this guide by including this parameter
+        metadata: { integration_check: 'accept_a_payment' },
+        receipt_email: email
+    });
+    res.json({ 'client_secret': paymentIntent['client_secret'] })
+})
+
+
+
+
+
 require('./routes/dangnhap')(app);
 require("./routes/user")(app);
 require("./routes/Quocgia")(app);

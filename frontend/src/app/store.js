@@ -16,6 +16,7 @@ import hoadonReducer from "../features/container/admin/Hoadon/hoadonSlice"
 import tintucReducer from "../features/container/admin/tintuc/tintucSlice"
 import tagReducer from "../features/container/admin/Tag/tagSlice"
 import tintuctagReducer from "../features/container/admin/tintuc/tintuctagSlice"
+import thanhtoanReducer from "../features/container/detailtour/tour/thanhtoanSlice"
 
 const rootReducer = {
   user: userReducer,
@@ -35,6 +36,7 @@ const rootReducer = {
   tintucs: tintucReducer,
   tags: tagReducer,
   tintuctags: tintuctagReducer,
+  thanhtoans: thanhtoanReducer,
 
 }
 

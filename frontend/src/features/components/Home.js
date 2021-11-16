@@ -32,6 +32,7 @@ import Listtintuc from "../container/tintuc/listtintuc/Listtintuc";
 import Tintucdetail from "../container/tintuc/tintucdetail/Tintucdetail";
 import { tagData } from "../container/admin/Tag/tagSlice";
 import { tintucData } from "../container/admin/tintuc/tintucSlice";
+import Stripe from "../teststripe/Stripe";
 
 export default function NestingExample() {
   const dispatch = useDispatch();
@@ -110,6 +111,9 @@ export default function NestingExample() {
           </Route>
           <Route path="/detail-new/:id">
             <Tintucdetail />
+          </Route>
+          <Route path='/stripe'>
+            <Stripe />
           </Route>
         </Switch>
       </div>
