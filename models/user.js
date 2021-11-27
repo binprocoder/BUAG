@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
           through: "Binhluans"
         }),
         User.hasMany(models.UserRole),
+        User.hasMany(models.Thongbao)
         User.hasMany(models.Hoadoncanhan)
     }
   };

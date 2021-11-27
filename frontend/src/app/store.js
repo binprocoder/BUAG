@@ -17,6 +17,8 @@ import tintucReducer from "../features/container/admin/tintuc/tintucSlice"
 import tagReducer from "../features/container/admin/Tag/tagSlice"
 import tintuctagReducer from "../features/container/admin/tintuc/tintuctagSlice"
 import thanhtoanReducer from "../features/container/detailtour/tour/thanhtoanSlice"
+import thongbaoReducer from "../features/container/admin/Kiemduyet/thongbaoSlice"
+import hoadoncanhanReducer from "../features/container/admin/Hoadoncanhan/hoadoncanhanSlice"
 
 const rootReducer = {
   user: userReducer,
@@ -37,7 +39,8 @@ const rootReducer = {
   tags: tagReducer,
   tintuctags: tintuctagReducer,
   thanhtoans: thanhtoanReducer,
-
+  hoadoncanhans: hoadoncanhanReducer,
+  thongbao: thongbaoReducer
 }
 
 export default configureStore({

@@ -58,6 +58,8 @@ require("./routes/Hoadon")(app);
 require("./routes/Tintuc")(app);
 require("./routes/Tag")(app);
 require("./routes/TintucTag")(app);
+require("./routes/Thongbao")(app);
+require("./routes/Hoadoncanhan")(app);
 
 
 app.use(function (err, req, res, next) {

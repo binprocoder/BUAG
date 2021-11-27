@@ -30,6 +30,9 @@ import Themtintuc from './../tintuc/Themtintuc'
 import Tintuc from './../tintuc/Tintuc'
 import Chitiettintuc from './../tintuc/Chitiettintuc'
 import Doanhthu from './../Doanhthu/Doanhthu'
+import Hoadoncanhan from '../Hoadoncanhan/Hoadoncanhan';
+import { hoadoncanhanData } from '../Hoadoncanhan/hoadoncanhanSlice';
+import Kiemduyet from '../Kiemduyet/Kiemduyet';
 
 export default function Nav() {
     const match = useRouteMatch();
@@ -38,9 +41,21 @@ export default function Nav() {
         collapsed: true,
         visible: true
     })
+    const dispatch = useDispatch();
+    const actionResult = async () => { await dispatch(hoadoncanhanData()) }
     useEffect(() => {
+        actionResult();
         window.scrollTo(0, 0);
     }, []);
+    const hoadoncanhan = useSelector(state => state.hoadoncanhans.hoadoncanhan.data);
+    let counthoadon = 0;
+    if (hoadoncanhan) {
+        for (let i = 0; i < hoadoncanhan.length; i++) {
+            if (hoadoncanhan[i].kiemduyet === 0) {
+                counthoadon++
+            }
+        }
+    }
     const toggle = () => {
         setState({
             collapsed: !state.collapsed,
@@ -88,6 +103,7 @@ export default function Nav() {
             <Route path={`${match.path}/diadiem/suadiadiem/:id`}  >
                 <Themdiadiem />
             </Route>
+           
         </div>
     )
     const admin = (
@@ -188,6 +204,12 @@ export default function Nav() {
             <Route path={`${match.path}/tintuc/chitiettintuc/:id`}  >
                 <Chitiettintuc />
             </Route>
+            <Route exact path={`${match.path}/hoadoncanhan`}  >
+                <Hoadoncanhan url={match.url} />
+            </Route>
+            <Route exact path={`${match.path}/kiemduyet`}>
+                <Kiemduyet url={match.url} />
+            </Route>
         </div>
     )
     const menu_quanlytour = (
@@ -207,6 +229,7 @@ export default function Nav() {
             <Menu.Item key="5" icon={state.collapsed === true ? <span className="fas fa-place-of-worship" ></span> : <span className="fas fa-place-of-worship mr-2"></span>}>
                 <Link to={`${match.url}/diadiem`}>Quản lý địa điểm</Link>
             </Menu.Item>
+         
         </Menu>
     )
     const menu_quanlyadmin = (
@@ -249,6 +272,12 @@ export default function Nav() {
             </Menu.Item>
             <Menu.Item key="13" icon={state.collapsed === true ? <span className="fas fa-clock" ></span> : <span className="fas fa-clock mr-2"></span>}>
                 <Link to={`${match.url}/ngaydi`}>Quản lý Ngày đi</Link>
+            </Menu.Item>
+            <Menu.Item key="14" icon={state.collapsed === true ? <span className="fas fa-check-double"></span> : <span className="fas fa-check-double"></span>}>
+                <Link to={`${match.url}/kiemduyet`}>Kiểm duyệt tour {counthoadon === 0 ? "" : <Badge status="error" />}</Link>
+            </Menu.Item>
+            <Menu.Item key="15" icon={state.collapsed === true ? <span className="fas fa-file-invoice-dollar"></span> : <span className="fas fa-file-invoice-dollar"></span>}>
+                <Link to={`${match.url}/hoadoncanhan`}>Hoá đơn tạo tour</Link>
             </Menu.Item>
         </Menu>
     )

@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Footer from '../trangchu/footer/Footer'
+import hoadoncanhanApi from '../../../api/hoadoncanhanApi'
 import "./CreateTour.css"
 export default function CreateTour() {
     const { Option } = Select;
@@ -49,6 +50,7 @@ export default function CreateTour() {
                 message.warning("Ngày khởi hành không phù hợp!");
             } else {
                 console.log(td.join(", "), nxp, date1, infor.id);
+                hoadoncanhanApi.posthoadoncanhan({ userId: infor.id, noikhoihanh: nxp, ngaykhoihanh: date1, diadiemdi: td.join(", "), kiemduyet: 0, agree: 0 })
             }
         } else {
             message.warning("Bạn chưa nhập đầy đủ thông tin!");

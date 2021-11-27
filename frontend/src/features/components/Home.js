@@ -32,6 +32,9 @@ import Listtintuc from "../container/tintuc/listtintuc/Listtintuc";
 import Tintucdetail from "../container/tintuc/tintucdetail/Tintucdetail";
 import { tagData } from "../container/admin/Tag/tagSlice";
 import { tintucData } from "../container/admin/tintuc/tintucSlice";
+import { thongbaoData } from "../container/admin/Kiemduyet/thongbaoSlice";
+import Thongtin from "../container/trangchu/thongtin/Thongtin";
+
 import Stripe from "../teststripe/Stripe";
 
 export default function NestingExample() {
@@ -49,6 +52,7 @@ export default function NestingExample() {
   const actioninfor = async () => { await dispatch(inforData()) }
   const actiontag = async () => { await dispatch(tagData()) }
   const actiontintuc = async () => { await dispatch(tintucData()) }
+  const actionthongbao = async () => { await dispatch(thongbaoData()) }
 
   useEffect(() => {
 
@@ -65,6 +69,7 @@ export default function NestingExample() {
     actionhoadon();
     actiontintuc();
     actiontag();
+    actionthongbao();
     
   }, []);
   return (
@@ -111,6 +116,9 @@ export default function NestingExample() {
           </Route>
           <Route path="/detail-new/:id">
             <Tintucdetail />
+          </Route>
+          <Route path="/thongtin/:id">
+            <Thongtin />
           </Route>
           <Route path='/stripe'>
             <Stripe />
