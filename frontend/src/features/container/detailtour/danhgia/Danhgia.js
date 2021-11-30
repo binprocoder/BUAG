@@ -53,6 +53,55 @@ function Danhgia(props) {
             [e.target.name]: e.target.value
         })
     }
+    // Delay function
+    function delay(t, v) {
+        return new Promise(function (resolve) {
+            setTimeout(resolve.bind(null, v), t)
+        });
+    }
+    // Xử lý api bitext
+    const bitextApi = (comment) => {
+        var route;
+        fetch('https://svc02.api.bitext.com/sentiment/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'bearer 6c306cd6a8b542be8d7b489d0c6f4c52'
+            },
+            body: JSON.stringify({
+                language: 'eng',
+                text: comment,
+            })
+        })
+            .then(res => {
+                return res.json();
+            })
+            .then(data => route = data.resultid)
+            delay(5000).then(() => {
+                fetch('https://svc02.api.bitext.com/sentiment/' + route + '/', {
+                    method: 'Get',
+                    headers: {
+                        'Authorization': 'bearer 6c306cd6a8b542be8d7b489d0c6f4c52'
+                    },
+                })
+                    .then(res => {
+                        return res.json();
+                    })
+                    .then(data1 => {
+                        console.log(data1.sentimentanalysis);
+                        let kq = data1.sentimentanalysis.map((score) => {
+                            return score.score
+                        })
+                        var sum = 0;
+                        for (let i = 0; i < kq.length; i++) {
+                            var parse = parseInt(kq[i]);
+                            sum += parse;
+                        }
+                        return sum / kq.length;
+                    })
+            })
+            .catch(error => console.log('error'))
+    }
     const checklogin = useSelector(state => state.infor.infor.data);
     const onSubmit = e => {
         e.preventDefault();
@@ -67,6 +116,10 @@ function Danhgia(props) {
                     actionbinhluan();
                 }, 500);
             } else {
+                // Trước khi m add bình luận vào be thì m post lên api để get score
+                bitextApi(state.binhluan);
+                console.log();
+                // End
                 dispatch(addbinhluan({ tourId, binhluan, userId, star, status }))
                 setTimeout(() => {
                     actionbinhluan();
