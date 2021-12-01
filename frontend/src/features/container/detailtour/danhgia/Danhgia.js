@@ -60,7 +60,19 @@ function Danhgia(props) {
         });
     }
     // Xử lý api bitext
-    const bitextApi = (comment) => {
+
+    const printKQ = {
+        value: undefined,
+    };
+
+    function updateValue(nValue) {
+        this.value = nValue;
+    }
+
+    printKQ.updateValue = updateValue;
+    var scoreApi;
+
+    function bitextApi(comment) {
         var route;
         fetch('https://svc02.api.bitext.com/sentiment/', {
             method: 'POST',
@@ -68,6 +80,7 @@ function Danhgia(props) {
                 'Content-Type': 'application/json',
                 'Authorization': 'bearer 6c306cd6a8b542be8d7b489d0c6f4c52'
             },
+
             body: JSON.stringify({
                 language: 'eng',
                 text: comment,
@@ -76,32 +89,39 @@ function Danhgia(props) {
             .then(res => {
                 return res.json();
             })
-            .then(data => route = data.resultid)
-            delay(5000).then(() => {
-                fetch('https://svc02.api.bitext.com/sentiment/' + route + '/', {
-                    method: 'Get',
-                    headers: {
-                        'Authorization': 'bearer 6c306cd6a8b542be8d7b489d0c6f4c52'
-                    },
-                })
-                    .then(res => {
-                        return res.json();
-                    })
-                    .then(data1 => {
-                        console.log(data1.sentimentanalysis);
-                        let kq = data1.sentimentanalysis.map((score) => {
-                            return score.score
-                        })
-                        var sum = 0;
-                        for (let i = 0; i < kq.length; i++) {
-                            var parse = parseInt(kq[i]);
-                            sum += parse;
-                        }
-                        return sum / kq.length;
-                    })
+            .then(data => {
+                route = data.resultid
             })
-            .catch(error => console.log('error'))
+        delay(7000).then(() => {
+            fetch('https://svc02.api.bitext.com/sentiment/' + route + '/', {
+                method: 'Get',
+                headers: {
+                    'Authorization': 'bearer 6c306cd6a8b542be8d7b489d0c6f4c52'
+                },
+            })
+                .then(res => {
+                    return res.json();
+                })
+                .then(data1 => {
+                    // console.log(data1.sentimentanalysis);
+                    let kq = data1.sentimentanalysis.map((score) => {
+                        return score.score
+                    })
+                    var sum = 0;
+                    for (let i = 0; i < kq.length; i++) {
+                        var parse = parseInt(kq[i]);
+                        sum += parse;
+                    }
+
+                    printKQ.updateValue(sum / kq.length);
+                    console.log(printKQ.value);
+                    scoreApi = printKQ.value;
+
+                })
+        });
     }
+    // End
+
     const checklogin = useSelector(state => state.infor.infor.data);
     const onSubmit = e => {
         e.preventDefault();
@@ -118,12 +138,15 @@ function Danhgia(props) {
             } else {
                 // Trước khi m add bình luận vào be thì m post lên api để get score
                 bitextApi(state.binhluan);
-                console.log();
+                // setTimeout(() => {
+                //     scoreApi = printKQ.value;
+                //     console.log("Score Api khi add" + scoreApi);
+                // }, 12000);
                 // End
-                dispatch(addbinhluan({ tourId, binhluan, userId, star, status }))
                 setTimeout(() => {
+                    dispatch(addbinhluan({ tourId, binhluan, userId, star, status, scoreApi}))
                     actionbinhluan();
-                }, 500);
+                }, 12000);
             }
         } else {
             message.warning("Bạn quá ngắn, tối thiểu là 10 ký tự!");

@@ -34,6 +34,10 @@ function Binhluan() {
             dataIndex: 'loadhome',
         },
         {
+            title: 'Phân tích điểm',
+            dataIndex: 'scoreApi',
+        },
+        {
             title: 'Action',
             dataIndex: 'action'
         }
@@ -101,6 +105,7 @@ function Binhluan() {
                             star: <div className="size-binhluan"><Rate className="rate-binhluan" value={ok.star} disabled /></div>,
                             status: <div className="action">{ok.status === 1 ? <span onClick={() => { handleStatus(ok.status, ok.id) }}><i className="far fa-thumbs-up text-primary"></i></span> : <span onClick={() => handleStatus(ok.status, ok.id)}><i className="far fa-thumbs-down "></i></span>}</div>,
                             loadhome: <div className="action">{ok.loadhome === 1 ? <span onClick={() => { handleLoadhome(ok.loadhome, ok.id) }}><i className="fas fa-check text-success "></i></span> : <span onClick={() => handleLoadhome(ok.loadhome, ok.id)}><i className="fas fa-times text-danger"></i></span>}</div>,
+                            scoreApi: <span>{ok.scoreApi}</span>,
                             action:
                                 <div className="action">
                                     <span onClick={() => hangdleInfor(ok.id)}><i className="fas fa-info-circle mr-4 text-primary"></i></span>
