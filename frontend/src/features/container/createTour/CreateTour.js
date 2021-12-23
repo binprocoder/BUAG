@@ -77,7 +77,7 @@ export default function CreateTour() {
                 <div className="head--content">
                     <form action="" onSubmit={onSubmit} method="post">
                         <Select placeholder="Chọn nơi khởi hành" className="mr-2" style={{ width: 200 }} onChange={handleNoixuatphat}>
-                            <Option key="dn">Đà Nẵng</Option>
+                            <Option key="danang">Đà Nẵng</Option>
                         </Select>
                         <Select
                             mode="multiple"
