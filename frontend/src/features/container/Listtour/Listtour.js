@@ -201,7 +201,7 @@ export default function Listtour() {
                                                             </div>
                                                             <div className="money float-left ml-3 text-warning">
                                                                 {(ok.gianguoilon).toLocaleString()} VNĐ<br />
-                                                                <del> 4.000.000 VNĐ</del>
+                                                                
                                                             </div>
                                                         </div>
                                                     </Link>
@@ -222,7 +222,7 @@ export default function Listtour() {
                                                             </div>
                                                             <div className="money float-left ml-3 text-warning">
                                                                 {(ok.gianguoilon).toLocaleString()} VNĐ<br />
-                                                                <del> 4.000.000 VNĐ</del>
+                                                                
                                                             </div>
                                                         </div>
                                                     </Link>
@@ -241,7 +241,7 @@ export default function Listtour() {
                                                             </div>
                                                             <div className="money float-left ml-3 text-warning">
                                                                 {(ok.gianguoilon).toLocaleString()} VNĐ<br />
-                                                                <del> 4.000.000 VNĐ</del>
+                                                               
                                                             </div>
                                                         </div>
                                                     </Link>
