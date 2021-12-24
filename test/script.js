@@ -49,7 +49,7 @@ const bitextApi = (comment) => {
         })
 }
 const printKq = () => {
-    bitextApi('The restaurant cook is very bad but the chef is beautiful').then(a);
+    bitextApi('This travel trip is great, the company of service makes me very satisfied').then(a);
     console.log (a);
 }
 printKq();

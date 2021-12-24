@@ -29,7 +29,7 @@ function Banner(props) {
                             <div class="slider_text text-center">
                                 <h3 class="text_banner">Tạo tour du lịch của riêng mình</h3>
                                 <p>Tự tạo cho mình một lộ trình thú vị để có một kỳ nghỉ đáng nhớ hơn.</p>
-                                <a href="/create-tour" class="boxed-btn3">Create Tour</a>
+                                <a href="/create-tour" class="boxed-btn3">Tạo tour</a>
                             </div>
                         </div>
                     </div>

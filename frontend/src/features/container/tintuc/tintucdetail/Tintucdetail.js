@@ -60,21 +60,6 @@ function Tintucdetail(props) {
                                 </div>
                                 <div className="content">
                                     {renderHTML(ok.content)}
-                                    <Link>
-                                        <div className="icon-new float-left">
-                                            <span className="fab fa-facebook-f"></span>
-                                        </div>
-                                    </Link>
-                                    <Link>
-                                        <div className="icon-new float-left">
-                                            <i className="fab fa-twitter"></i>
-                                        </div>
-                                    </Link>
-                                    <Link>
-                                        <div className="icon-new float-left">
-                                            <i className="fab fa-instagram"></i>
-                                        </div>
-                                    </Link>
                                     <div className="text-right">
                                         <p><i>Tác giả:</i> <strong><i>{ok.tacgia}</i></strong></p>
                                         <p>Ngày đăng: <i><strong>{formatdate(ok.createdAt)}</strong></i></p>

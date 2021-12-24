@@ -108,7 +108,7 @@ export default function Doanhthu() {
                         </div>
                     </div>
                     <div className="monney float-right">
-                        <span><strong>$ {LoiNhuan((TongThuNhap / usd).toFixed(0))}</strong></span><br />
+                        <span><strong>$ {LoiNhuan(((TongThuNhap / usd)-150).toFixed(0))}</strong></span><br />
                         <span>Lợi nhuận</span>
                     </div>
                 </div>
@@ -124,7 +124,7 @@ export default function Doanhthu() {
                     </div>
                 </div>
             </div>
-            <h4 className="mt-4 mb-2">Chỉ tiêu</h4>
+            <h4 className="mt-4 mb-2">Doanh thu</h4>
             <div className="container text-center">
                 <div className="row pt-3 pb-2">
                     <div className="col-md-4">
@@ -134,7 +134,7 @@ export default function Doanhthu() {
                         }} type="dashboard" percent={100} />
 
                         <div>
-                            <h5>Chỉ tiêu ngày</h5>
+                            <h5>Doanh thu ngày</h5>
                             <div className="hr"></div>
                             <div className="mt-2">
                                 <span>Tổng thu: <span className="gold">{ThuNhapHomNay.toLocaleString()} <span className="text-danger bold">vnđ</span></span></span><br />
@@ -149,7 +149,7 @@ export default function Doanhthu() {
                         }} type="dashboard" percent={100} />
 
                         <div>
-                            <h5>Chỉ tiêu tháng</h5>
+                            <h5>Doanh thu tháng</h5>
                             <div className="hr"></div>
                             <div className="mt-2">
                                 <span>Tổng thu: <span className="gold">{ThuNhapThang.toLocaleString()} <span className="text-danger bold">vnđ</span></span></span><br />
@@ -163,7 +163,7 @@ export default function Doanhthu() {
                         }} type="dashboard" percent={100} />
 
                         <div>
-                            <h5>Chỉ tiêu năm</h5>
+                            <h5>Doanh thu năm</h5>
                             <div className="hr"></div>
                             <div className="mt-2">
                                 <span>Tổng thu: <span className="gold">{ThuNhapNam.toLocaleString()} <span className="text-danger bold">vnđ</span></span></span><br />

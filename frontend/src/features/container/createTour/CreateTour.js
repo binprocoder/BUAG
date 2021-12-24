@@ -43,14 +43,33 @@ export default function CreateTour() {
         dt.setMinutes(0);
         return date < dt
     }
+    // const onSubmit = () => {
+    //     //e.preventDefault();
+    //     if (date !== "" && td !== "" && td.length !== 0 && nxp !== "") {
+    //         if (!compare(date)) {
+    //             message.warning("Ngày khởi hành không phù hợp!");
+    //         } else {
+    //             console.log(td.join(", "), nxp, date1, infor.id);
+    //             hoadoncanhanApi.posthoadoncanhan({ userId: infor.id, noikhoihanh: nxp, ngaykhoihanh: date1, diadiemdi: td.join(", "), kiemduyet: 0, agree: 0 })
+    //         }
+    //     } else {
+    //         message.warning("Bạn chưa nhập đầy đủ thông tin!");
+    //     }
+    // }
     const onSubmit = () => {
         //e.preventDefault();
         if (date !== "" && td !== "" && td.length !== 0 && nxp !== "") {
             if (!compare(date)) {
                 message.warning("Ngày khởi hành không phù hợp!");
             } else {
-                console.log(td.join(", "), nxp, date1, infor.id);
-                hoadoncanhanApi.posthoadoncanhan({ userId: infor.id, noikhoihanh: nxp, ngaykhoihanh: date1, diadiemdi: td.join(", "), kiemduyet: 0, agree: 0 })
+                if(infor === undefined)
+                {
+                    message.warning("Bạn cần phải đăng nhập trước");
+                }
+                else{
+                    console.log(td.join(", "), nxp, date1, infor.id);
+                    hoadoncanhanApi.posthoadoncanhan({ userId: infor.id, noikhoihanh: nxp, ngaykhoihanh: date1, diadiemdi: td.join(", "), kiemduyet: 0, agree: 0 })
+                }
             }
         } else {
             message.warning("Bạn chưa nhập đầy đủ thông tin!");
@@ -77,8 +96,8 @@ export default function CreateTour() {
                 <div className="head--content">
                     <form action="" onSubmit={onSubmit} method="post">
                         <Select placeholder="Chọn nơi khởi hành" className="mr-2" style={{ width: 200 }} onChange={handleNoixuatphat}>
-                            <Option key="Sài Gòn">Sài Gòn</Option>
                             <Option key="Đà Nẵng">Đà Nẵng</Option>
+                            <Option key="Sài Gòn">Sài Gòn</Option>
                             <Option key="Hà Nội">Hà Nội</Option>
                             <Option key="Vũng Tàu">Vũng Tàu</Option>
                             <Option key="Sapa">Sapa</Option>

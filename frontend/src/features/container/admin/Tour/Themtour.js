@@ -109,7 +109,7 @@ function Themtour(props) {
     const onSubmit = async (e) => {
         e.preventDefault();
         const { checkdichvu, checkloaitour, checkngaydi, checkdiadiem, diadiemId, dichvuId, loaitourId } = state
-        if (name.trim() === "" || diadiemId.length === 0 || dichvuId.length === 0 || loaitourId.length === 0 || ngaydiId.length === 0 || gianguoilon === "" || giatreem === "" || giaembe === ""  || chitiettour.trim() === "" || luuy.trim() === "" || thoigian === "" || songuoi === "") {
+        if (name.trim() === "" || diadiemId.length === 0 || dichvuId.length === 0 || loaitourId.length === 0 || ngaydiId.length === 0 || gianguoilon === "" || giatreem === "" || giaembe === ""  || chitiettour.trim() === "" || thoigian === "" || songuoi === "") {
             message.warning("Xin hãy nhập đầy đủ thông tin!");
         } else {
             setState({ ...state, load: true })
@@ -449,14 +449,14 @@ function Themtour(props) {
                             onChange={e => setchitiettour(e)}
                         />
                     </div>
-                    <div className="form-group ">
+                    {/* <div className="form-group ">
                         <label htmlFor="">Lưu ý</label>
                         <JoditEditor
                             value={luuy}
                             tabIndex={1} // tabIndex of textarea
                             onChange={e => setluuy(e)}
                         />
-                    </div>
+                    </div> */}
 
                     <div className="text-center mtb">
                         {load ? <div className="spinner-border text-success" role="status"><span className="sr-only">Loading...</span></div> : ''}

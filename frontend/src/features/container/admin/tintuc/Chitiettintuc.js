@@ -23,9 +23,6 @@ function Chitiettintuc(props) {
                             <div className="text-center"><img width="500px" height="400px" src={tintuc.anh} alt="" /></div>
                             <p>Tên tác giả:&emsp; <b><i>{tintuc.tacgia}</i></b></p>
                             <p>Ngày đăng:&emsp; <b><i>{tintuc.createdAt}</i></b></p>
-                            <p>Facebook:&emsp; <i>{tintuc.facebook}</i></p>
-                            <p>Twitch:&emsp; <i>{tintuc.twitch}</i></p>
-                            <p>Instagram:&emsp; <i>{tintuc.instagram}</i></p>
                             <p>Tóm tắt:&emsp;</p>
                             <div className="container">
                                 <p>{tintuc.tomtat}</p>

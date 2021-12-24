@@ -64,6 +64,9 @@ export default function Nav() {
     const user = useSelector(state => state.infor.infor.data);
     const quanlytour = (
         <div>
+             <Route exact path={match.path}>
+                <Doanhthu />
+            </Route>
             <Route exact path={`${match.path}/tour`}  >
                 <Tour url={match.url} />
             </Route>
