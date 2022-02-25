@@ -33,6 +33,8 @@ import Doanhthu from './../Doanhthu/Doanhthu'
 import Hoadoncanhan from '../Hoadoncanhan/Hoadoncanhan';
 import { hoadoncanhanData } from '../Hoadoncanhan/hoadoncanhanSlice';
 import Kiemduyet from '../Kiemduyet/Kiemduyet';
+import Phanhoi from '../Phanhoi/Phanhoi';
+import Suaphanhoi from '../Phanhoi/Suaphanhoi';
 
 export default function Nav() {
     const match = useRouteMatch();
@@ -213,6 +215,12 @@ export default function Nav() {
             <Route exact path={`${match.path}/kiemduyet`}>
                 <Kiemduyet url={match.url} />
             </Route>
+            <Route exact path={`${match.path}/phanhoi`}>
+                <Phanhoi url={match.url} />
+            </Route>
+            <Route path ={`${match.path}/phanhoi/suaphanhoi/:id`}>
+                <Suaphanhoi url={match.url} />
+            </Route>
         </div>
     )
     const menu_quanlytour = (
@@ -281,6 +289,9 @@ export default function Nav() {
             </Menu.Item>
             <Menu.Item key="15" icon={state.collapsed === true ? <span className="fas fa-file-invoice-dollar"></span> : <span className="fas fa-file-invoice-dollar"></span>}>
                 <Link to={`${match.url}/hoadoncanhan`}>Hoá đơn tạo tour</Link>
+            </Menu.Item>
+            <Menu.Item key="16" icon={state.collapsed === true ? <span className="fas fa-comments"></span> : <span className="fas fa-comments"></span>}>
+                <Link to={`${match.url}/phanhoi`}>Quản lý phản hồi tour</Link>
             </Menu.Item>
         </Menu>
     )

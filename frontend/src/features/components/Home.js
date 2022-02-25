@@ -34,6 +34,8 @@ import { tagData } from "../container/admin/Tag/tagSlice";
 import { tintucData } from "../container/admin/tintuc/tintucSlice";
 import { thongbaoData } from "../container/admin/Kiemduyet/thongbaoSlice";
 import Thongtin from "../container/trangchu/thongtin/Thongtin";
+import { phanhoiData } from "../container/admin/Phanhoi/phanhoiSlice";
+
 
 import Stripe from "../teststripe/Stripe";
 
@@ -53,6 +55,7 @@ export default function NestingExample() {
   const actiontag = async () => { await dispatch(tagData()) }
   const actiontintuc = async () => { await dispatch(tintucData()) }
   const actionthongbao = async () => { await dispatch(thongbaoData()) }
+  const actionphanhoi = async () => { await dispatch(phanhoiData()) }
 
   useEffect(() => {
 
@@ -70,7 +73,7 @@ export default function NestingExample() {
     actiontintuc();
     actiontag();
     actionthongbao();
-    
+    actionphanhoi();
   }, []);
   return (
     <Router>

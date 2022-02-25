@@ -14,6 +14,7 @@ import { hoadonData } from "../container/admin/Hoadon/hoadonSlice";
 import { binhluanData } from "../container/admin/Binhluan/binhluanSlice";
 import { tintucData } from "../container/admin/tintuc/tintucSlice";
 import { tagData } from "../container/admin/Tag/tagSlice";
+import { phanhoiData } from "../container/admin/Phanhoi/phanhoiSlice";
 
 
 export default function LoadApi() {
@@ -31,6 +32,7 @@ export default function LoadApi() {
     const actionhoadon = async () => { await dispatch(hoadonData()) }
     const actiontintuc = async () => { await dispatch(tintucData()) }
     const actiontag = async () => { await dispatch(tagData()) }
+    const actionphanhoi= async () => { await dispatch(phanhoiData()) }
 
     useEffect(() => {
         actionquocgia();
@@ -46,7 +48,7 @@ export default function LoadApi() {
         actionhoadon();
         actiontintuc();
         actiontag();
-
+        actionphanhoi();
     }, [])
 
 }
