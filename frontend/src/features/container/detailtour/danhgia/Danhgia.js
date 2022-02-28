@@ -6,6 +6,8 @@ import './danhgia.css'
 import { Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { addbinhluan, binhluanData, updatebinhluan } from '../../admin/Binhluan/binhluanSlice';
+const { monkeyLearnAnalysis } = require("../../../utils/monkeylearn");
+
 function Danhgia(props) {
     const [text, setText] = useState(renderHTML("<span className='text-success'>Cực kỳ hài lòng</span>"))
     const [state, setState] = useState({ binhluan: '', star: 5, status: 1, diem: '' })
@@ -21,6 +23,7 @@ function Danhgia(props) {
     }
     const taikhoans = useSelector(state => state.taikhoan.user.data);
     const load = useSelector(state => state.binhluans.loading);
+    const phanhois = useSelector(state => state.phanhois.phanhoi.data);
     const { binhluan, star, status } = state
     const dispatch = useDispatch();
     const danhgiatext = e => {
@@ -71,7 +74,7 @@ function Danhgia(props) {
 
     printKQ.updateValue = updateValue;
     var scoreApi;
-
+    // Api bitext tạm dừng sử dụng
     function bitextApi(comment) {
         var route;
         fetch('https://svc02.api.bitext.com/sentiment/', {
@@ -123,7 +126,7 @@ function Danhgia(props) {
     // End
 
     const checklogin = useSelector(state => state.infor.infor.data);
-    const onSubmit = e => {
+    const onSubmit = async e => {
         e.preventDefault();
         var tourId = props.id;
         var userId = infor.id;
@@ -137,16 +140,12 @@ function Danhgia(props) {
                 }, 500);
             } else {
                 // Trước khi m add bình luận vào be thì m post lên api để get score
-                bitextApi(state.binhluan);
-                // setTimeout(() => {
-                //     scoreApi = printKQ.value;
-                //     console.log("Score Api khi add" + scoreApi);
-                // }, 12000);
+                const analyzeComment = await monkeyLearnAnalysis(state.binhluan);
+                dispatch(addbinhluan({ tourId, binhluan, userId, star, status, scoreApi, analyzeComment}))
                 // End
                 setTimeout(() => {
-                    dispatch(addbinhluan({ tourId, binhluan, userId, star, status, scoreApi}))
                     actionbinhluan();
-                }, 12000);
+                }, 500);
             }
         } else {
             message.warning("Bạn quá ngắn, tối thiểu là 10 ký tự!");
@@ -188,6 +187,7 @@ function Danhgia(props) {
         }
         return diem
     }
+    const phanhoi = phanhois.map(item => item.responseComment)
     const songuoidanhgia = () => {
         return binhluanload.length
     }
@@ -287,6 +287,18 @@ function Danhgia(props) {
                                     <Rate className="rate" value={ok.star} disabled /><br />
                                     {checkstar(ok.star)}<br />
                                     <p className="content-nx text-justify">{ok.binhluan}</p>
+                                </div>
+                                <div className = "float-right">
+                                    <div className="tt-user">
+                                        <strong>Phản hồi của người bán</strong>
+                                    </div>
+                                    <div className="clear nx">
+                                        <span className="text-primary">Phản hồi vào {formatdate(ok.createdAt)}</span>
+                                        {ok.analyzeComment === "Neutral"?<p className="content-nx text-justify">{phanhoi[2]}</p> 
+                                        :  ok.analyzeComment === "Positive" 
+                                        ? <p className="content-nx text-justify">{phanhoi[1]}</p> 
+                                        :<p className="content-nx text-justify">{phanhoi[0]}</p> }
+                                    </div>
                                 </div>
                             </div>
                         ))}

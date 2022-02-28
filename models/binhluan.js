@@ -39,6 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     loadhome: DataTypes.INTEGER,
     status: DataTypes.INTEGER,
     scoreApi: DataTypes.INTEGER,
+    analyzeComment: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Binhluan',
