@@ -35,6 +35,7 @@ import { hoadoncanhanData } from '../Hoadoncanhan/hoadoncanhanSlice';
 import Kiemduyet from '../Kiemduyet/Kiemduyet';
 import Phanhoi from '../Phanhoi/Phanhoi';
 import Suaphanhoi from '../Phanhoi/Suaphanhoi';
+import Bieudo from '../Bieudo/Bieudo';
 
 export default function Nav() {
     const match = useRouteMatch();
@@ -221,6 +222,9 @@ export default function Nav() {
             <Route path ={`${match.path}/phanhoi/suaphanhoi/:id`}>
                 <Suaphanhoi url={match.url} />
             </Route>
+            <Route exact path ={`${match.path}/bieudo`}>
+                <Bieudo url={match.url} />
+            </Route>
         </div>
     )
     const menu_quanlytour = (
@@ -292,6 +296,9 @@ export default function Nav() {
             </Menu.Item>
             <Menu.Item key="16" icon={state.collapsed === true ? <span className="fas fa-comments"></span> : <span className="fas fa-comments"></span>}>
                 <Link to={`${match.url}/phanhoi`}>Quản lý phản hồi tour</Link>
+            </Menu.Item>
+            <Menu.Item key="17" icon={state.collapsed === true ? <span className="fas fa-chart-bar"></span> : <span className="fas fa-comments"></span>}>
+                <Link to={`${match.url}/bieudo`}>Biểu đồ</Link>
             </Menu.Item>
         </Menu>
     )
