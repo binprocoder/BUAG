@@ -61,6 +61,7 @@ require("./routes/TintucTag")(app);
 require("./routes/Thongbao")(app);
 require("./routes/Hoadoncanhan")(app);
 require("./routes/Phanhoi")(app);
+require("./routes/Chude")(app);
 
 
 app.use(function (err, req, res, next) {
