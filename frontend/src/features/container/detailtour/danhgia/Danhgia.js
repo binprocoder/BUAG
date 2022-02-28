@@ -134,7 +134,8 @@ function Danhgia(props) {
             if (binhluans.find(x => x.tourId === +tourId && x.userId === +userId)) {
                 var binhluanid = binhluans.find(x => x.tourId === +tourId && x.userId === +userId);
                 var idsua = binhluanid.id
-                dispatch(updatebinhluan({ idsua, tourId, binhluan, userId, star, status }))
+                const analyzeComment = await monkeyLearnAnalysis(state.binhluan);
+                dispatch(updatebinhluan({ idsua, tourId, binhluan, userId, star, status ,scoreApi,analyzeComment }))
                 setTimeout(() => {
                     actionbinhluan();
                 }, 500);
