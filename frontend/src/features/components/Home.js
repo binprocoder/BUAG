@@ -35,6 +35,7 @@ import { tintucData } from "../container/admin/tintuc/tintucSlice";
 import { thongbaoData } from "../container/admin/Kiemduyet/thongbaoSlice";
 import Thongtin from "../container/trangchu/thongtin/Thongtin";
 import { phanhoiData } from "../container/admin/Phanhoi/phanhoiSlice";
+import { chudeData } from "../container/admin/Chude/chudeSlice";
 
 
 import Stripe from "../teststripe/Stripe";
@@ -56,6 +57,7 @@ export default function NestingExample() {
   const actiontintuc = async () => { await dispatch(tintucData()) }
   const actionthongbao = async () => { await dispatch(thongbaoData()) }
   const actionphanhoi = async () => { await dispatch(phanhoiData()) }
+  const actionchude = async () => { await dispatch(chudeData()) }
 
   useEffect(() => {
 
@@ -74,6 +76,7 @@ export default function NestingExample() {
     actiontag();
     actionthongbao();
     actionphanhoi();
+    actionchude();
   }, []);
   return (
     <Router>

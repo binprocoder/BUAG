@@ -20,6 +20,7 @@ import thanhtoanReducer from "../features/container/detailtour/tour/thanhtoanSli
 import thongbaoReducer from "../features/container/admin/Kiemduyet/thongbaoSlice"
 import hoadoncanhanReducer from "../features/container/admin/Hoadoncanhan/hoadoncanhanSlice"
 import phanhoiReducer from "../features/container/admin/Phanhoi/phanhoiSlice"
+import chudeReducer from "../features/container/admin/Chude/chudeSlice"
 
 const rootReducer = {
   user: userReducer,
@@ -42,7 +43,8 @@ const rootReducer = {
   thanhtoans: thanhtoanReducer,
   hoadoncanhans: hoadoncanhanReducer,
   thongbao: thongbaoReducer,
-  phanhois: phanhoiReducer
+  phanhois: phanhoiReducer,
+  chudes: chudeReducer
 }
 
 export default configureStore({

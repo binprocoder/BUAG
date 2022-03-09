@@ -15,6 +15,7 @@ import { binhluanData } from "../container/admin/Binhluan/binhluanSlice";
 import { tintucData } from "../container/admin/tintuc/tintucSlice";
 import { tagData } from "../container/admin/Tag/tagSlice";
 import { phanhoiData } from "../container/admin/Phanhoi/phanhoiSlice";
+import { chudeData } from "../container/admin/Chude/chudeSlice";
 
 
 export default function LoadApi() {
@@ -33,6 +34,7 @@ export default function LoadApi() {
     const actiontintuc = async () => { await dispatch(tintucData()) }
     const actiontag = async () => { await dispatch(tagData()) }
     const actionphanhoi= async () => { await dispatch(phanhoiData()) }
+    const actionchude= async () => { await dispatch(chudeData()) }
 
     useEffect(() => {
         actionquocgia();
@@ -49,6 +51,7 @@ export default function LoadApi() {
         actiontintuc();
         actiontag();
         actionphanhoi();
+        actionchude();
     }, [])
 
 }

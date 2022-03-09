@@ -36,6 +36,8 @@ import Kiemduyet from '../Kiemduyet/Kiemduyet';
 import Phanhoi from '../Phanhoi/Phanhoi';
 import Suaphanhoi from '../Phanhoi/Suaphanhoi';
 import Bieudo from '../Bieudo/Bieudo';
+import Chude from '../Chude/Chude';
+import Themchude from './../Chude/Themchude'
 
 export default function Nav() {
     const match = useRouteMatch();
@@ -225,6 +227,15 @@ export default function Nav() {
             <Route exact path ={`${match.path}/bieudo`}>
                 <Bieudo url={match.url} />
             </Route>
+            <Route exact path ={`${match.path}/chude`}>
+                <Chude url={match.url} />
+            </Route>
+            <Route path={`${match.path}/chude/themchude`}  >
+                <Themchude />
+            </Route>
+            <Route path={`${match.path}/chude/suachude/:id`}  >
+                <Themchude />
+            </Route>
         </div>
     )
     const menu_quanlytour = (
@@ -297,8 +308,11 @@ export default function Nav() {
             <Menu.Item key="16" icon={state.collapsed === true ? <span className="fas fa-comments"></span> : <span className="fas fa-comments"></span>}>
                 <Link to={`${match.url}/phanhoi`}>Quản lý phản hồi tour</Link>
             </Menu.Item>
-            <Menu.Item key="17" icon={state.collapsed === true ? <span className="fas fa-chart-bar"></span> : <span className="fas fa-comments"></span>}>
+            <Menu.Item key="17" icon={state.collapsed === true ? <span className="fas fa-chart-bar"></span> : <span className="fas fa-chart-bar"></span>}>
                 <Link to={`${match.url}/bieudo`}>Biểu đồ</Link>
+            </Menu.Item>
+            <Menu.Item key="18" icon={state.collapsed === true ? <span className="fa fa-list-alt"></span> : <span className="fa fa-list-alt"></span>}>
+                <Link to={`${match.url}/chude`}>Chủ đề</Link>
             </Menu.Item>
         </Menu>
     )
