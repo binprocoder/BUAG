@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
   };
   Chude.init({
-    chude: DataTypes.STRING
+    chuDe: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Chude',
