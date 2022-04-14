@@ -9,7 +9,7 @@ exports.create = (req, res) => {
     })
 }
 exports.findall = (req, res) => {
-    Binhluanchude.findAll({ include: [{ model: Binhluan, attributes: ['id', 'scoreApi', 'analyzeComment'] }, { model: Chude, attributes: ['id', 'chuDe'] }] }).then(data => {
+    Binhluanchude.findAll({ include: [{ model: Binhluan, attributes: ['id', 'binhluan', 'scoreApi','analyzeComment'] }, { model: Chude, attributes: ['id', 'chuDe'] }] }).then(data => {
         res.json({ data: data })
     }).catch(er => {
         throw er;
