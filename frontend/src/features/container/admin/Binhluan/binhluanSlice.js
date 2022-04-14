@@ -22,6 +22,12 @@ const Binhluan = createSlice({
         },
         updatebinhluan: (state, action) => {
             binhluanApi.editbinhluan(action.payload);
+        },
+        findbinhluan: (state, action) => {
+            binhluanApi.getbinhluan(action.payload);
+        },
+        getallbinhluan: (state,action) => {
+            binhluanApi.getallbinhluan();
         }
     },
     extraReducers: {
@@ -39,6 +45,6 @@ const Binhluan = createSlice({
     }
 });
 const { reducer, actions } = Binhluan;
-export const { addbinhluan, removebinhluan, updatebinhluan } = actions;
+export const { addbinhluan, removebinhluan, updatebinhluan, findbinhluan, getallbinhluan } = actions;
 
 export default reducer;

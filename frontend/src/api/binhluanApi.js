@@ -30,6 +30,14 @@ class BinhluanApi {
             message.error("Có lỗi xảy ra!");
         });
     }
+    getbinhluan = (params) => {
+        const url = `/binhluans/${params.id}`;
+        return axiosClient.get(url, {params})
+    }
+    getallbinhluan = () => {
+        const url = `/binhluans`
+        return axiosClient.get(url)
+    }
 }
 const binhluanApi = new BinhluanApi();
 export default binhluanApi;

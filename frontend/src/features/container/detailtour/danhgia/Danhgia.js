@@ -1,12 +1,15 @@
 import { message, Progress, Rate, Spin } from 'antd'
 import Avatar from 'antd/lib/avatar/avatar'
 import renderHTML from 'react-render-html';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './danhgia.css'
 import { Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { addbinhluan, binhluanData, updatebinhluan } from '../../admin/Binhluan/binhluanSlice';
+import { addbinhluan, binhluanData, updatebinhluan, findbinhluan } from '../../admin/Binhluan/binhluanSlice';
+import { addbinhluanchude, binhluanchudeData } from '../../admin/Binhluanchude/binhluanchudeSlice';
+import binhluanApi from '../../../../api/binhluanApi'
 const { monkeyLearnAnalysis } = require("../../../utils/monkeylearn");
+var isSubmitComment = false;
 
 function Danhgia(props) {
     const [text, setText] = useState(renderHTML("<span className='text-success'>Cực kỳ hài lòng</span>"))
@@ -124,7 +127,6 @@ function Danhgia(props) {
         });
     }
     // End
-
     const checklogin = useSelector(state => state.infor.infor.data);
     const onSubmit = async e => {
         e.preventDefault();
@@ -142,7 +144,11 @@ function Danhgia(props) {
             } else {
                 // Trước khi m add bình luận vào be thì m post lên api để get score
                 const analyzeComment = await monkeyLearnAnalysis(state.binhluan);
-                dispatch(addbinhluan({ tourId, binhluan, userId, star, status, scoreApi, analyzeComment}))
+                const res = await dispatch(addbinhluan({ tourId, binhluan, userId, star, status, scoreApi, analyzeComment}))
+                res.payload !== undefined ? isSubmitComment = true : isSubmitComment = false
+                console.log(res.payload, isSubmitComment)
+                // let id = binhluanid.id
+                // const idBinhluan = await dispatch(findbinhluan({id}))
                 // End
                 setTimeout(() => {
                     actionbinhluan();
@@ -156,6 +162,17 @@ function Danhgia(props) {
             binhluan: '',
         })
     }
+
+    const getAllBinhluan = async () => {
+        let data
+        if(isSubmitComment === true){
+            const resAll = await binhluanApi.getallbinhluan();
+            data = resAll.data[resAll.data.length - 1 ].id
+        }
+        console.log(data);
+        return data;
+    }
+    getAllBinhluan();
     const checkstar = (e) => {
         switch (e) {
             case 5:

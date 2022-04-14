@@ -38,6 +38,7 @@ import Suaphanhoi from '../Phanhoi/Suaphanhoi';
 import Bieudo from '../Bieudo/Bieudo';
 import Chude from '../Chude/Chude';
 import Themchude from './../Chude/Themchude'
+import Binhluanchude from './../Binhluanchude/Binhluanchude'
 
 export default function Nav() {
     const match = useRouteMatch();
@@ -236,6 +237,9 @@ export default function Nav() {
             <Route path={`${match.path}/chude/suachude/:id`}  >
                 <Themchude />
             </Route>
+            <Route exact path={`${match.path}/binhluanchude`}  >
+                <Binhluanchude url={match.url} />
+            </Route>
         </div>
     )
     const menu_quanlytour = (
@@ -313,6 +317,9 @@ export default function Nav() {
             </Menu.Item>
             <Menu.Item key="18" icon={state.collapsed === true ? <span className="fa fa-list-alt"></span> : <span className="fa fa-list-alt"></span>}>
                 <Link to={`${match.url}/chude`}>Chủ đề</Link>
+            </Menu.Item>
+            <Menu.Item key="19" icon={state.collapsed === true ? <span className="fa fa-list-alt"></span> : <span className="fa fa-list-alt"></span>}>
+                <Link to={`${match.url}/binhluanchude`}>Bình luận chủ đề</Link>
             </Menu.Item>
         </Menu>
     )
