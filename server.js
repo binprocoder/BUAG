@@ -8,10 +8,11 @@ const Stripe = require('stripe');
 const stripe = Stripe('sk_test_51JvilZB36PKJt46mB4ANXnXBOA2jsJ5zCef0EwHRjE07stlFLFP3qAybd28UziINm2mPADme1eZVh6qeav54BNs2009bnwcV67');
 const talkToChatbot = require('./chatbot')
 const fulfillmentRoutes = require('./fulfillment')
-app.use(cors());
-app.use(morgan('dev'))
 let jsonParser = express.json()
 let urlEncoded = express.urlencoded({ extended: true })
+app.use(cors());
+app.use(morgan('dev'))
+
 app.post('/chatbot', jsonParser, urlEncoded, async (req, res) => {
     const message = req.body.message
     console.log('message' + message)

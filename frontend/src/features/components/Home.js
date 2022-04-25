@@ -1,4 +1,6 @@
 import React, { useEffect,useState } from "react";
+import Button from '../components/Button'
+import Chat from '../components/Chat'
 import '../../index.css';
 import {
   BrowserRouter as Router,
@@ -82,8 +84,15 @@ export default function NestingExample() {
     actionchude();
     actionbinhluanchude();
   }, []);
+  const [show, setShow] = useState(false)
+
+  const showBtn = () => {
+    setShow(!show)
+  }
   return (
     <>
+    <Button show={show} showBtn={showBtn} />
+      {show && <Chat/>}
     <Router>
       <div>
         <Switch>

@@ -18,6 +18,8 @@
   "homepage": "https://github.com/binprocoder/PC1#readme",
   "dependencies": {
     "@google-cloud/dialogflow": "^4.7.0",
+    "actions": "^1.3.0",
+    "actions-on-google": "^3.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dialogflow": "^1.2.0",
