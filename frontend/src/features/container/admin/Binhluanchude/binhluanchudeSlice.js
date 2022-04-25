@@ -22,6 +22,9 @@ const Binhluanchude = createSlice({
         },
         updatebinhluanchude: (state, action) => {
             binhluanchudeApi.editbinhluan(action.payload);
+        },
+        getallbinhluan: (state,action) => {
+            binhluanchudeApi.getallbinhluan();
         }
     },
     extraReducers: {

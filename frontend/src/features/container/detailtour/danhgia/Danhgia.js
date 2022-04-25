@@ -18,6 +18,7 @@ function Danhgia(props) {
     const binhluanchudes = useSelector(state => state.binhluanchudes.binhluanchude.data);
     const chudes = useSelector(state => state.chudes.chude.data)
     const infor = useSelector(state => state.infor.infor.data);
+    const [stateTest, setStateTest] = useState(0)
     var binhluanload = [];
     if (binhluans) {
         for (let i = 0; i < binhluans.length; i++) {
@@ -157,8 +158,8 @@ function Danhgia(props) {
                 const analyzeComment = await monkeyLearnAnalysis(state.binhluan);
                 const res = await dispatch(addbinhluan({ tourId, binhluan, userId, star, status, scoreApi, analyzeComment}))
                 res.payload !== undefined ? isSubmitComment = true : isSubmitComment = false
-                console.log(res.payload, isSubmitComment)
                 console.log(getIdChude(binhluan))
+                setStateTest(getIdChude(binhluan))
                 // let id = binhluanid.id
                 // const idBinhluan = await dispatch(findbinhluan({id}))
                 // End
@@ -174,6 +175,7 @@ function Danhgia(props) {
             binhluan: '',
         })
     }
+
     const getAllBinhluan = async () => {
         let data
         if(isSubmitComment === true){
@@ -181,16 +183,13 @@ function Danhgia(props) {
             data = resAll.data[resAll.data.length - 1 ].id
         }
         // Lấy id trong db check thử id chỗ này với db có tồn tại chưa có thì không làm gì chưa thì thêm vào
-        console.log(data, binhluans[binhluans.length - 1])
         if(data !== undefined){
             if(data === binhluans[binhluans.length - 1].id){
-                console.log('add vao db', binhluanchudes)
                 // Check id trong binhluanchudes co chua chua co thi them vao co roi thi thoi
                 const idbinhluanchudes = binhluanchudes.map(binhluan => binhluan.id)
-                if(idbinhluanchudes.indexOf(data) === -1){
+                if(idbinhluanchudes.indexOf(data) === -1 && stateTest!== undefined){
                     // add vao db
-                    const res = await dispatch(addbinhluanchude({ binhluanId: data, chudeId: 1}))
-                    console.log(res)
+                    await dispatch(addbinhluanchude({ binhluanId: data, chudeId: stateTest}))
                 }
             }
             else{

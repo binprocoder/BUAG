@@ -29,6 +29,10 @@ class BinhluanchudeApi {
         }).catch(err => {
             message.error("Có lỗi xảy ra!");
         });
+    };
+    getallbinhluan = () => {
+        const url = `/binhluanchudes`
+        return axiosClient.get(url)
     }
 }
 const binhluanchudeApi = new BinhluanchudeApi();

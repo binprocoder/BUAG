@@ -29,6 +29,10 @@ class ChudeApi {
         }).catch(err => {
             message.error("Có lỗi xảy ra!");
         });
+    };
+    getallbinhluan = () => {
+        const url = `/chudes`
+        return axiosClient.get(url)
     }
 }
 const chudeApi = new ChudeApi();

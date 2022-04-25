@@ -22,6 +22,9 @@ const Chude = createSlice({
         },
         updatechude: (state, action) => {
             chudeApi.editchude(action.payload);
+        },
+        getallchude: (state, action) => {
+            chudeApi.getAll();
         }
     },
     extraReducers: {
@@ -39,6 +42,6 @@ const Chude = createSlice({
     }
 });
 const { reducer, actions } = Chude;
-export const { addchude, removechude, updatechude } = actions;
+export const { addchude, removechude, updatechude, getallchude } = actions;
 
 export default reducer;
