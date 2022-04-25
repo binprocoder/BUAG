@@ -3,7 +3,6 @@ import Message from './Message'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 const Messages = ({ messages }) => {
-  //console.log(messages)
   const messagesEndRef = useRef(null)
   const scrollToBottom = () => {
     messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })

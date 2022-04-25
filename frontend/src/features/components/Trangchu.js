@@ -7,19 +7,20 @@ import Dichvu from "../container/trangchu/dichvu/Dichvu";
 import Footer from "../container/trangchu/footer/Footer";
 import CreateTour from "../container/trangchu/createTour/CreateTour";
 import Tintuc from "../container/trangchu/tintuc/Tintuc";
-
+import Showchat from "./showchat"
 export class Trangchu extends Component {
 
   render() {
     return (
       <div>
-        <Banner />
+        <Banner/>
         <CreateTour />
         <Tourtrongnuoc />
         <Tournuocngoai />
         <Dichvu />
         <Tintuc />
         <Footer />
+        <Showchat/>
       </div>
     );
   }
