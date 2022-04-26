@@ -22,7 +22,7 @@ const Chat = () => {
   const [check, setCheck] = useState(false)
   const [card, setCard] = useState(cards)
   const cardSearch = [{}]
-
+  const checkSearch = false;
   const handleMessageSubmit = (message) => {
     const data = {
       message,
@@ -38,7 +38,11 @@ const Chat = () => {
               : "Sorry, I can't get it. Can you please repeat once?")
             || (response.data['message'] !== ''
               ? response.data['message']
-              : "Sorry, I can't get it. Can you please repeat once?"),
+              : "Sorry, I can't get it. Can you please repeat once?")
+            || (response.data['message']['intent']['displayName'] === "SearchTour"
+              && response.data['message']['fulfillmentText']
+             )
+          ,
           isBot: true,
 
         }
@@ -46,7 +50,7 @@ const Chat = () => {
         //   console.log("âsasas")
         // {
         //   for (var i = 0; i < card.length; i++) {
-    
+
         //     if (response.data['message']["queryText"].toString().includes(card[i].Loaitours[0].name)) {
         //       cardSearch.push({
         //         name: card[i].name,
@@ -57,26 +61,36 @@ const Chat = () => {
         //   }
         //   setCard(cardSearch)
         //   setCheck(true)
-        // }
-        setCard(cards)
-        setCheck(false)
-        for (var i = 0; i < card.length; i++) {
-          if (response.data['message']["queryText"].toString().includes(card[i].name)) {
-            cardSearch.push({
-              id: card[i].id,
-              name: card[i].name,
-              avatar: card[i].avatar,
-              gianguoilon: card[i].gianguoilon
-            })
-            setCard(cardSearch)
-            setCheck(true)
-
-          }
-
-
+        // } Hãy nhập tour mà bạn tìm kiếm! Thời tiết hiện tại ở
+        if(responseData.text.includes("Thời tiết hiện tại ở"))
+        {
+          console.log("check",responseData.text.includes("Thời tiết hiện tại ở"))
         }
+        else {
+          console.log("ok")
+          setCard(cards)
+          setCheck(false)
+          for (var i = 0; i < card.length; i++) {
+            if (response.data['message']["queryText"].toString().includes(card[i].name)) {
+              cardSearch.push({
+                id: card[i].id,
+                name: card[i].name,
+                avatar: card[i].avatar,
+                gianguoilon: card[i].gianguoilon
+              })
+              setCard(cardSearch)
+              setCheck(true)
+            }
+          }
+        //   console.log(card)
+        // console.log(check)
+        }
+        // console.log(card)
+        // console.log(check)
         if (response.data['message']['fulfillmentText'] === 'Tôi sẽ gợi ý một số tour trong nước của công ty chúng tôi') {
-          setCheck(true) }
+          setCheck(true)
+        }
+
         console.log(response.data)
         setResponses((responses) => [...responses, responseData])
       })
