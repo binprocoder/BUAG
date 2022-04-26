@@ -18,7 +18,7 @@ const sessionClient = new dialogflow.SessionsClient(configuration)
 const sessionPath = sessionClient.sessionPath(projectId, sessionId)
 
 const talkToChatbot = async (message) => {
-  // console.log('message ' + message)
+  console.log('message ' + message)
   const botRequest = {
     session: sessionPath,
     queryInput: {
@@ -35,7 +35,7 @@ const talkToChatbot = async (message) => {
       // console.log(JSON.stringify(responses))
 
       var requiredResponse = responses[0].queryResult
-      // console.log(requiredResponse)
+      console.log(requiredResponse)
       if(requiredResponse.intent.displayName === 'detect-city'){
         const city = requiredResponse.parameters.fields['geo-city'].stringValue;
         //fetch the temperature from openweathermap

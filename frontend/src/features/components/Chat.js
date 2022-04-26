@@ -8,6 +8,7 @@ fetch('http://localhost:666/tours')
   .then(data => {
     for (var i = 0; i < data.data.length; i++) {
       cards.push({
+        id: data.data[i].id,
         name: data.data[i].name,
         avatar: data.data[i].avatar,
         gianguoilon: data.data[i].gianguoilon,
@@ -29,6 +30,7 @@ const Chat = () => {
     Axios
       .post('http://localhost:666/chatbot', data)
       .then((response) => {
+        // console.log(response.data['message']['parameters']['fields']['keySearch']['stringValue"'])
         const responseData = {
           text:
             (response.data['message']['fulfillmentText'] !== ''
@@ -56,12 +58,12 @@ const Chat = () => {
         //   setCard(cardSearch)
         //   setCheck(true)
         // }
-        if (response.data['message']['fulfillmentText'] === 'Tôi sẽ gợi ý một số tour trong nước của công ty chúng tôi') { setCheck(true) }
         setCard(cards)
         setCheck(false)
         for (var i = 0; i < card.length; i++) {
           if (response.data['message']["queryText"].toString().includes(card[i].name)) {
             cardSearch.push({
+              id: card[i].id,
               name: card[i].name,
               avatar: card[i].avatar,
               gianguoilon: card[i].gianguoilon
@@ -73,7 +75,8 @@ const Chat = () => {
 
 
         }
-
+        if (response.data['message']['fulfillmentText'] === 'Tôi sẽ gợi ý một số tour trong nước của công ty chúng tôi') {
+          setCheck(true) }
         console.log(response.data)
         setResponses((responses) => [...responses, responseData])
       })
