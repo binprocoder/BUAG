@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Button from './Button'
 import Chat from './Chat'
 
-const showchat = () => {
+const Showchat = () => {
   const [show, setShow] = useState(false)
 
   const showBtn = () => {
@@ -17,4 +17,4 @@ const showchat = () => {
   )
 }
 
-export default showchat
+export default Showchat

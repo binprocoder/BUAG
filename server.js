@@ -17,16 +17,25 @@ app.post('/chatbot', jsonParser, urlEncoded, async (req, res) => {
     const message = req.body.message
     console.log('message' + message)
   
-    talkToChatbot(message)
-      .then((response) => {
-        res.send({ message: response })
+    try{
+      const response = await talkToChatbot(message)
+      res.send({ message: response })
+    }catch(err){
+      console.log('Something went wrong: ' + err)
+      res.send({
+        error: 'Error occured here',
       })
-      .catch((error) => {
-        console.log('Something went wrong: ' + error)
-        res.send({
-          error: 'Error occured here',
-        })
-      })
+    }
+    // talkToChatbot(message)
+    //   .then((response) => {
+    //     res.send({ message: response })
+    //   })
+    //   .catch((error) => {
+    //     console.log('Something went wrong: ' + error)
+    //     res.send({
+    //       error: 'Error occured here',
+    //     })
+    //   })
   })
   app.use(fulfillmentRoutes)
 // app.use(bodyParser.json());

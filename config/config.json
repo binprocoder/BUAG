@@ -1,8 +1,8 @@
 {
     "development": {
         "username": "root",
-        "password": "123456789",
-        "database": "test_db",
+        "password": "trandaiquy123",
+        "database": "testBuag",
         "host": "127.0.0.1",
         "dialect": "mysql",
         "logging": true

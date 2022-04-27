@@ -8,16 +8,63 @@ const configuration = {
     client_email: dialogflowConfig.client_email,
   },
 }
-
-
-
+var https = require('https');
+var http = require('http');
 const sessionId = '997753'
 const languageCode = 'en-US'
 const sessionClient = new dialogflow.SessionsClient(configuration)
-
 const sessionPath = sessionClient.sessionPath(projectId, sessionId)
 
+const postData = (dataObj) =>{
+  const data = JSON.stringify(dataObj);
+  
+  const options = {
+    hostname: 'localhost',
+    port: 666,
+    path: '/users',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Content-Length': data.length,
+    },
+  };
+  
+  const req = http.request(options, res => {
+    console.log(`statusCode: ${res.statusCode}`);
+    res.setEncoding('utf8');
+  
+    res.on('data', d => {
+      console.log(d)
+    });
+  });
+  
+  req.on('error', error => {
+    console.error(error);
+  });
+  
+  req.write(data);
+  req.end();
+}
 const talkToChatbot = async (message) => {
+  http.get('http://localhost:666/users', (resp) => {
+
+    let result = 0;
+    resp.setEncoding('utf8');
+
+    // on succ
+    resp.on('data', (d) => {
+        result = d;
+    });
+
+    // on end
+    resp.on('end', () => {
+        JSON.parse(result);
+        // console.log(result);
+    });
+
+}).on("error", (err) => {
+    console.log("Error: " + err.message);
+});
   console.log('message ' + message)
   const botRequest = {
     session: sessionPath,
@@ -47,6 +94,21 @@ const talkToChatbot = async (message) => {
     .catch((error) => {
       console.log('ERROR: ' + error)
     })
+  const name = response.parameters.fields.name.stringValue
+  const email = response.parameters.fields.email.stringValue
+  const password = response.parameters.fields.password.stringValue
+  // // Đăng ký user
+  if(response.action === 'iDangkiUser'){
+    if(name !== '' && email !== '' && password !== ''){
+      const UserRoles = [{ roleId: 3 }]
+      const status = 1;
+      console.log(123)
+      const res = await postData({ name, status, email, password, UserRoles })
+      console.log(res)
+    }
+  }
+  console.log('hello' + JSON.stringify(response))
+ 
   return response
 }
 
