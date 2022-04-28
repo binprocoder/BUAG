@@ -12,6 +12,8 @@ fetch('http://localhost:666/tours')
         name: data.data[i].name,
         avatar: data.data[i].avatar,
         gianguoilon: data.data[i].gianguoilon,
+        vitri: data.data[i].vitri,
+        status: data.data[i].status
       })
     }
   });
@@ -67,7 +69,6 @@ const Chat = () => {
           console.log("check",responseData.text.includes("Thời tiết hiện tại ở"))
         }
         else {
-          console.log("ok")
           setCard(cards)
           setCheck(false)
           for (var i = 0; i < card.length; i++) {
@@ -76,21 +77,77 @@ const Chat = () => {
                 id: card[i].id,
                 name: card[i].name,
                 avatar: card[i].avatar,
-                gianguoilon: card[i].gianguoilon
+                gianguoilon: card[i].gianguoilon,
+                vitri: card[i].vitri,
+                status: card[i].status
               })
               setCard(cardSearch)
               setCheck(true)
             }
           }
-        //   console.log(card)
-        // console.log(check)
-        }
-        // console.log(card)
-        // console.log(check)
-        if (response.data['message']['fulfillmentText'] === 'Tôi sẽ gợi ý một số tour trong nước của công ty chúng tôi') {
-          setCheck(true)
-        }
 
+        }
+        if (response.data['message']['fulfillmentText'] === 'Tôi sẽ gợi ý các tour  của công ty chúng tôi hiện có')
+        {
+          setCard(cards)
+          setCheck(false)
+          for (var i = 0; i < card.length; i++) {
+            if (card[i].status == 1) {
+              cardSearch.push({
+                id: card[i].id,
+                name: card[i].name,
+                avatar: card[i].avatar,
+                gianguoilon: card[i].gianguoilon,
+                vitri: card[i].vitri,
+                status: card[i].status
+              })
+              setCard(cardSearch)
+              setCheck(true)
+            }
+          }
+          console.log("checkhienco",cardSearch)
+        }
+        else if (response.data['message']['fulfillmentText'] === 'Tôi sẽ gợi ý một số tour trong nước của công ty chúng tôi') {
+          // setCheck(true)
+          setCard(cards)
+          setCheck(false)
+          for (var i = 0; i < card.length; i++) {
+            if (card[i].vitri == 1) {
+              cardSearch.push({
+                id: card[i].id,
+                name: card[i].name,
+                avatar: card[i].avatar,
+                gianguoilon: card[i].gianguoilon,
+                vitri: card[i].vitri,
+                status: card[i].status
+              })
+              setCard(cardSearch)
+              setCheck(true)
+            }
+          }
+          console.log("checktrongnuoc",cardSearch)
+        }
+        else if (response.data['message']['fulfillmentText'] === 'Tôi sẽ gợi ý một số tour ở nước ngoài của công ty chúng tôi') {
+          console.log("ok nuoc ngoài")
+          setCard(cards)
+          setCheck(false)
+          for (var i = 0; i < card.length; i++) {
+            if (card[i].vitri == 2) {
+              cardSearch.push({
+                id: card[i].id,
+                name: card[i].name,
+                avatar: card[i].avatar,
+                gianguoilon: card[i].gianguoilon,
+                vitri: card[i].vitri,
+                status: card[i].status
+              })
+              setCard(cardSearch)
+              setCheck(true)
+            }
+          }
+          console.log("checknogainuoc",cardSearch)
+        }
+        console.log(card)
         console.log(response.data)
         setResponses((responses) => [...responses, responseData])
       })

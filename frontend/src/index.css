@@ -188,6 +188,7 @@ svg{
   overflow-x: auto;
   scroll-behavior: smooth;
   width: 450px;
+  /* width: 292px; */
 }
 
 .product-container::-webkit-scrollbar {

@@ -15,9 +15,9 @@ const languageCode = 'en-US'
 const sessionClient = new dialogflow.SessionsClient(configuration)
 const sessionPath = sessionClient.sessionPath(projectId, sessionId)
 
-const postData = (dataObj) =>{
+const postData = (dataObj) => {
   const data = JSON.stringify(dataObj);
-  
+
   const options = {
     hostname: 'localhost',
     port: 666,
@@ -28,20 +28,20 @@ const postData = (dataObj) =>{
       'Content-Length': data.length,
     },
   };
-  
+
   const req = http.request(options, res => {
     console.log(`statusCode: ${res.statusCode}`);
     res.setEncoding('utf8');
-  
+
     res.on('data', d => {
       console.log(d)
     });
   });
-  
+
   req.on('error', error => {
     console.error(error);
   });
-  
+
   req.write(data);
   req.end();
 }
@@ -53,18 +53,18 @@ const talkToChatbot = async (message) => {
 
     // on succ
     resp.on('data', (d) => {
-        result = d;
+      result = d;
     });
 
     // on end
     resp.on('end', () => {
-        JSON.parse(result);
-        // console.log(result);
+      JSON.parse(result);
+      // console.log(result);
     });
 
-}).on("error", (err) => {
+  }).on("error", (err) => {
     console.log("Error: " + err.message);
-});
+  });
   console.log('message ' + message)
   const botRequest = {
     session: sessionPath,
@@ -83,23 +83,26 @@ const talkToChatbot = async (message) => {
 
       var requiredResponse = responses[0].queryResult
       console.log(requiredResponse)
-      if(requiredResponse.intent.displayName === 'detect-city'){
+      if (requiredResponse.intent.displayName === 'detect-city') {
         const city = requiredResponse.parameters.fields['geo-city'].stringValue;
         //fetch the temperature from openweathermap
         return getWeatherInfo(city).then(temperature => {
           requiredResponse = 'Thời tiết hiện tại ở ' + city + ' có nhiệt độ là ' + temperature + '°C'
-        return requiredResponse})}
+          return requiredResponse
+        })
+      }
       return requiredResponse
     })
     .catch((error) => {
       console.log('ERROR: ' + error)
     })
-  const name = response.parameters.fields.name.stringValue
-  const email = response.parameters.fields.email.stringValue
-  const password = response.parameters.fields.password.stringValue
+
   // // Đăng ký user
-  if(response.action === 'iDangkiUser'){
-    if(name !== '' && email !== '' && password !== ''){
+  if (response.action === 'iDangkiUser') {
+    const name = response.parameters.fields.name.stringValue
+    const email = response.parameters.fields.email.stringValue
+    const password = response.parameters.fields.password.stringValue
+    if (name !== '' && email !== '' && password !== '') {
       const UserRoles = [{ roleId: 3 }]
       const status = 1;
       console.log(123)
@@ -108,7 +111,7 @@ const talkToChatbot = async (message) => {
     }
   }
   console.log('hello' + JSON.stringify(response))
- 
+
   return response
 }
 
