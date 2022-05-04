@@ -3,10 +3,41 @@ var express = require('express');
 // var bodyParser = require('body-parser');
 var app = express();
 var cors = require('cors');
+const morgan = require('morgan')
 const Stripe = require('stripe');
 const stripe = Stripe('sk_test_51JvilZB36PKJt46mB4ANXnXBOA2jsJ5zCef0EwHRjE07stlFLFP3qAybd28UziINm2mPADme1eZVh6qeav54BNs2009bnwcV67');
-
+const talkToChatbot = require('./chatbot')
+const fulfillmentRoutes = require('./fulfillment')
+let jsonParser = express.json()
+let urlEncoded = express.urlencoded({ extended: true })
 app.use(cors());
+app.use(morgan('dev'))
+
+app.post('/chatbot', jsonParser, urlEncoded, async (req, res) => {
+    const message = req.body.message
+    console.log('message' + message)
+  
+    try{
+      const response = await talkToChatbot(message)
+      res.send({ message: response })
+    }catch(err){
+      console.log('Something went wrong: ' + err)
+      res.send({
+        error: 'Error occured here',
+      })
+    }
+    // talkToChatbot(message)
+    //   .then((response) => {
+    //     res.send({ message: response })
+    //   })
+    //   .catch((error) => {
+    //     console.log('Something went wrong: ' + error)
+    //     res.send({
+    //       error: 'Error occured here',
+    //     })
+    //   })
+  })
+  app.use(fulfillmentRoutes)
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({
