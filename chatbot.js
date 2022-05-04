@@ -14,7 +14,6 @@ const sessionId = '997753'
 const languageCode = 'en-US'
 const sessionClient = new dialogflow.SessionsClient(configuration)
 const sessionPath = sessionClient.sessionPath(projectId, sessionId)
-
 const postData = (dataObj) => {
   const data = JSON.stringify(dataObj);
 
@@ -30,6 +29,35 @@ const postData = (dataObj) => {
   };
 
   const req = http.request(options, res => {
+    console.log(`statusCode: ${res.statusCode}`);
+    res.setEncoding('utf8');
+
+    res.on('data', d => {
+      console.log(d)
+    });
+  });
+
+  req.on('error', error => {
+    console.error(error);
+  });
+
+  req.write(data);
+  req.end();
+}
+const postHoaDonCaNhan = (dataObj) => {
+  const data = JSON.stringify(dataObj);
+  console.log(data);
+  const optionss = {
+    hostname: 'localhost',
+    port: 666,
+    path: '/hoadoncanhans',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  };
+
+  const req = http.request(optionss, res => {
     console.log(`statusCode: ${res.statusCode}`);
     res.setEncoding('utf8');
 
@@ -109,8 +137,17 @@ const talkToChatbot = async (message) => {
       const res = await postData({ name, status, email, password, UserRoles })
       console.log(res)
     }
+  }else if(response.action === 'iDangkiTour'){
+
+    const time = response.parameters.fields.time.stringValue
+    const locationEnd = response.parameters.fields.locationEnd.stringValue
+    const locationStart = response.parameters.fields.locationStart.stringValue
+    if (time !== '' && locationEnd !== '' && locationStart !== '') {
+        const res = await postHoaDonCaNhan({ userId: 1, noikhoihanh: locationStart, ngaykhoihanh: time.split('T')[0], diadiemdi: locationEnd, kiemduyet: 0, agree: 0 })
+        console.log(res)
+    }
   }
-  console.log('hello' + JSON.stringify(response))
+  console.log('hello' + response.action)
 
   return response
 }

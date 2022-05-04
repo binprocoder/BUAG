@@ -8,11 +8,51 @@ const Stripe = require('stripe');
 const stripe = Stripe('sk_test_51JvilZB36PKJt46mB4ANXnXBOA2jsJ5zCef0EwHRjE07stlFLFP3qAybd28UziINm2mPADme1eZVh6qeav54BNs2009bnwcV67');
 const talkToChatbot = require('./chatbot')
 const fulfillmentRoutes = require('./fulfillment')
+const mailjet = require ('node-mailjet').connect(process.env.MJ_APIKEY_PUBLIC, process.env.MJ_APIKEY_PRIVATE)
 let jsonParser = express.json()
 let urlEncoded = express.urlencoded({ extended: true })
 app.use(cors());
 app.use(morgan('dev'))
-
+// Send email
+app.post('/sendemail',jsonParser, urlEncoded, async(req,res)=>{
+  console.log(req.body)
+  const request = mailjet
+    .post("send", {'version': 'v3.1'})
+    .request({
+      "Messages":[
+        {
+          "From": {
+            "Email": "phucv172@gmail.com",
+            "Name": "Quy Tran - Seller BUAG"
+          },
+          "To": [
+            {
+              "Email": req.body.email,
+              "Name": req.body.name
+            }
+          ],
+          "TemplateID": 3909947,
+          "TemplateLanguage": true,
+          "Subject": "Invoice Tour",
+          "Variables": {
+        "firstname": req.body.name,
+        "total_price": req.body.thanhtien,
+        "order_date": req.body.orderDate,
+        "order_id": req.body.orderId
+      }
+        }
+      ]
+    })
+  request
+    .then((result) => {
+      res.send(result)
+      console.log(result.body)
+    })
+    .catch((err) => {
+      res.send(err)
+      console.log(err.statusCode)
+    })
+} )
 app.post('/chatbot', jsonParser, urlEncoded, async (req, res) => {
     const message = req.body.message
     console.log('message' + message)
