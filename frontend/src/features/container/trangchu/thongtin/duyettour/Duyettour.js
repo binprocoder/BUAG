@@ -42,7 +42,8 @@ export default function Duyettour() {
             <div className="container">
                 <div className="duyettour__content">
                     {hoadon.length === 0 ? "" :
-                        hoadon.map((ok, index) => (
+                        hoadon.map((ok, index) => ( 
+                            ok.giatien === null ? '':
                             <div className="duyettour__box" key={index}>
                                 <div className="duyettour--name">
                                     {ok.diadiemdi}

@@ -208,19 +208,21 @@ function Tour(props) {
     if (state.dieukhoan === false) {
       message.warning("Bạn chưa đồng ý điều khoản của chúng tôi!")
     } else {
+      console.log(stylepayment)
       var userId = await taikhoanApi.getOne(+users.id).then(data => {
         return data.id;
       })
       var tourId = id
       let tongtien = thanhtien(tour_ngay[0].gianguoilon,tour_ngay[0].giatreem, tour_ngay[0].giaembe)
       if (stylepayment === 1) {
-        await dispatch(addhoadon({ thanhtien: tongtien, tourId, userId, nguoilon, treem, embe, ngaydi: state.date === "" ? formatlaidate(checkngaydi()) : state.date }));
-        setState({
-          ...state,
-          visible2: false,
-          visible: false,
-          loadlaihoadon: state.loadlaihoadon + 1
-        });
+        // await dispatch(addhoadon({ thanhtien: tongtien, tourId, userId, nguoilon, treem, embe, ngaydi: state.date === "" ? formatlaidate(checkngaydi()) : state.date }));
+        // setState({
+        //   ...state,
+        //   visible2: false,
+        //   visible: false,
+        //   loadlaihoadon: state.loadlaihoadon + 1
+        // });
+        message.warning("Vui lòng quý khách tới các cửa hàng chi nhánh của công ty để đặt vé. Hiện tại chưa hỗ trợ thanh toán trực tiếp trên website")
       } else if (stylepayment === 3) {
 
         dispatch(addthanhtoan({ hoadon: { tourId, userId, nguoilon, treem, embe, ngaydi: state.date === "" ? formatlaidate(checkngaydi()) : state.date }, nguoilon, treem, embe, tongtien, "name": tour_ngay[0].name, "giatreem": tour_ngay[0].giatreem, "giaembe": tour_ngay[0].giaembe, "gianguoilon": tour_ngay[0].gianguoilon }))
