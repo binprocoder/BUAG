@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from "chart.js";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale,  Title,} from "chart.js";
 import { Pie, Bar } from "react-chartjs-2";
 import { useDispatch, useSelector } from 'react-redux';
 import binhluanchudeApi from '../../../../api/binhluanchudeApi'
 import chudeApi from '../../../../api/chudeApi'
 
 
-ChartJS.register(ArcElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
+ChartJS.register(ArcElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale, Title);
 let binhluancd , chudes
 const test = async () => {
   
@@ -19,23 +19,26 @@ test()
 function Bieudo() {
   // const binhluanchudes = useSelector(state => state.binhluanchudes.binhluanchude.data)
   // const chudes = useSelector(state => state.chudes.chude.data)
-  console.log(binhluancd,chudes)
   const binh = []
   binhluancd.forEach(binhluan => {
-    console.log(binhluan)
     if(binh.indexOf(binhluan) !== -1){
       binh.push(binhluan)
     }
   })
-  console.log(binh)
   const chude = chudes.map(chude=>chude.chuDe)
   const arr = []
   chude.forEach(chude => {
     const kq = binhluancd.filter(binhluan => binhluan.Chude.chuDe === chude)
     arr.push(kq);
   })
-  const k = arr.map(item => item.length)
-  console.log(k)
+  const d = arr.map(itema => {
+    const testb = itema.map(item=>item.binhluanId)
+    let test = itema.filter((item,index)=> {
+      return !testb.includes(item.binhluanId, index + 1)
+    })
+    return test
+  })
+  const k = d.map(item => item.length)
   const data = {
     labels: chude,
     datasets: [
@@ -75,33 +78,43 @@ function Bieudo() {
       },
     },
   };
-
-  const labels = ['room', 'hotel', 'food', 'service', 'rest room', 'pool'];
-
+  // Process data chart positive and negative 
+  const labels = chude;
+  const blcdPostive = arr.map(blcd => blcd.filter(item=>item.Binhluan.analyzeComment === 'Positive').length)
+  const blcdNegative = arr.map(blcd => blcd.filter(item=>item.Binhluan.analyzeComment === 'Negative').length)
   const data1 = {
     labels,
     datasets: [
       {
-        label: 'Dataset 1',
-        data: [12, 19, 3, 5, 2, 3],
+        label: '',
+        data: blcdPostive,
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       }
     ],
   };
-  const labels2 = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-  const data2 = {
-    labels2,
+  const data3 = {
+    labels,
     datasets: [
       {
-        label: 'Dataset 1',
-        data: [12, 19, 3, 5, 2, 3],
+        label: '',
+        data: blcdNegative,
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      }
+    ],
+  };
+  
+  const data2 = {
+    labels,
+    datasets: [
+      {
+        label: 'Positive',
+        data: blcdPostive,
+        backgroundColor: "rgba(54, 162, 235, 0.2)",
       },
       {
-        label: 'Dataset 2',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        label: 'Negative',
+        data: blcdNegative,
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
       },
     ],
   };
@@ -121,7 +134,6 @@ function Bieudo() {
             }
           }}
         />
-        Chart 
       </div>
       <div style={{ width: 500  }}>
         <Bar
@@ -132,7 +144,7 @@ function Bieudo() {
       </div>
       <div style={{ width: 500  }}>
         <Bar
-          data={data1}
+          data={data3}
           options={options}
         />
         Negative

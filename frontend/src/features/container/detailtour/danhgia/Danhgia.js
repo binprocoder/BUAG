@@ -130,10 +130,10 @@ function Danhgia(props) {
         });
     }
     const getIdChude = (binhluan) => {
-        let id;
+        let id = [];
         chudes.map(chude => {
           if(binhluan.includes(chude.chuDe)){
-            id = chude.id
+            id.push(chude.id);
           }
         })
         return id
@@ -158,13 +158,12 @@ function Danhgia(props) {
                 const analyzeComment = await monkeyLearnAnalysis(state.binhluan);
                 const res = await dispatch(addbinhluan({ tourId, binhluan, userId, star, status, scoreApi, analyzeComment}))
                 res.payload !== undefined ? isSubmitComment = true : isSubmitComment = false
-                console.log(getIdChude(binhluan))
-                setStateTest(getIdChude(binhluan))
                 // let id = binhluanid.id
                 // const idBinhluan = await dispatch(findbinhluan({id}))
                 // End
-                setTimeout(() => {
+                setTimeout(async () => {
                     actionbinhluan();
+                    await getAllBinhluan()
                 }, 500);
             }
         } else {
@@ -182,23 +181,19 @@ function Danhgia(props) {
             const resAll = await binhluanApi.getallbinhluan();
             data = resAll.data[resAll.data.length - 1 ].id
         }
-        // Lấy id trong db check thử id chỗ này với db có tồn tại chưa có thì không làm gì chưa thì thêm vào
-        if(data !== undefined){
-            if(data === binhluans[binhluans.length - 1].id){
-                // Check id trong binhluanchudes co chua chua co thi them vao co roi thi thoi
-                const idbinhluanchudes = binhluanchudes.map(binhluan => binhluan.id)
-                if(idbinhluanchudes.indexOf(data) === -1 && stateTest!== undefined){
-                    // add vao db
-                    await dispatch(addbinhluanchude({ binhluanId: data, chudeId: stateTest}))
-                }
-            }
-            else{
-                return data
-            }
+        const resA = await binhluanApi. getbinhluan({id: data});
+        setStateTest(getIdChude(resA.data.binhluan))
+        if(resA.data.binhluan!== undefined){          
+            // add vao db
+            const id = getIdChude(resA.data.binhluan);
+            id.map(async(item) => {
+                console.log(resA.data.binhluan)
+                await dispatch(addbinhluanchude({ binhluanId: data, chudeId: item}))
+            })
         }
         return data;
     }
-    getAllBinhluan();
+    // getAllBinhluan();
     const checkstar = (e) => {
         switch (e) {
             case 5:
