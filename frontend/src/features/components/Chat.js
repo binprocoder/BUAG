@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Axios from 'axios'
 import Messages from './Messages'
 import Card from './Card'
+import {useSelector} from 'react-redux'
 const cards = [{}]
 fetch('http://localhost:666/tours')
   .then(response => response.json())
@@ -17,18 +18,28 @@ fetch('http://localhost:666/tours')
       })
     }
   });
-
 const Chat = () => {
+  let user = useSelector(state=> state.infor.infor.data)
+
   const [responses, setResponses] = useState([])
   const [currentMessage, setCurrentMessage] = useState('')
   const [check, setCheck] = useState(false)
   const [card, setCard] = useState(cards)
   const cardSearch = [{}]
   const checkSearch = false;
+  console.log(user)
+  if(!user){
+    user = {
+      id: 1
+    }
+  }
   const handleMessageSubmit = (message) => {
     const data = {
       message,
+      userId: user.id
     }
+
+
     Axios
       .post('http://localhost:666/chatbot', data)
       .then((response) => {

@@ -17,21 +17,21 @@ function Binhluanchude() {
             title: 'Bình luận',
             dataIndex: 'binhluan',
         },
+        // {
+        //     title: 'Phân tích bình luận',
+        //     dataIndex: 'analyzeComment',
+        // },
         {
-            title: 'Số điểm',
-            dataIndex: 'scoreApi',
+            title: 'Đoạn văn trong câu',
+            dataIndex: 'binhluancd',
         },
         {
-            title: 'Phân tích bình luận',
-            dataIndex: 'analyzeComment',
+            title: 'Phân tích trong đoạn',
+            dataIndex: 'analyzeCmt',
         },
         {
             title: 'Chủ đề',
             dataIndex: 'chude',
-        },
-        {
-            title: 'Action',
-            dataIndex: 'action'
         }
     ];
     const binhluanchudes = useSelector(state => state.binhluanchudes.binhluanchude.data);
@@ -71,19 +71,10 @@ function Binhluanchude() {
                         key: index + 1,
                         id: index + 1,
                         binhluan: <span>{ok.Binhluan.binhluan}</span>,
-                        analyzeComment: <p className="text-justify"><b>{ok.Binhluan.analyzeComment}</b></p>,
-                        scoreApi: <div className = "score-api">{ok.analyzeComment === "Neutral"
-                        ?<p style = {{color: "#ccc"}}> Normal </p>
-                        : ok.analyzeComment === "Positive" 
-                        ?<p className = "safeScore"> Good </p>
-                        :<p className = "dangerScore"> Need to improve </p>}</div>,
+                        // analyzeComment: <p className="text-justify"><b>{ok.Binhluan.analyzeComment}</b></p>,
+                        binhluancd: <p className="text-justify"><b>{ok.binhluancd}</b></p>,
+                        analyzeCmt: <p className="text-justify"><b>{ok.analyzeCmt}</b></p>,
                         chude: <span>{ok.Chude.chuDe}</span>,
-                        action:
-                            <div className="action">
-                                <Popconfirm title="Bạn có muốn xoá？" onConfirm={() => { hangdleDelete(ok.id) }} icon={<QuestionCircleOutlined style={{ color: 'red' }} />}>
-                                    <i className="far fa-trash-alt" ></i>
-                                </Popconfirm>
-                            </div>
                     }))} /> 
                 
                 }

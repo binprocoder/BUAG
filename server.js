@@ -55,10 +55,11 @@ app.post('/sendemail',jsonParser, urlEncoded, async(req,res)=>{
 } )
 app.post('/chatbot', jsonParser, urlEncoded, async (req, res) => {
     const message = req.body.message
+    const userId = req.body.userId
     console.log('message' + message)
   
     try{
-      const response = await talkToChatbot(message)
+      const response = await talkToChatbot(message, userId)
       res.send({ message: response })
     }catch(err){
       console.log('Something went wrong: ' + err)

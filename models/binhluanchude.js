@@ -34,6 +34,8 @@ module.exports = (sequelize, DataTypes) => {
         key: "id"
       }
     },
+    binhluancd: DataTypes.STRING,
+    analyzeCmt: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Binhluanchude',

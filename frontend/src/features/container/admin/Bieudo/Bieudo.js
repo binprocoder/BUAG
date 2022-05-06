@@ -19,18 +19,14 @@ test()
 function Bieudo() {
   // const binhluanchudes = useSelector(state => state.binhluanchudes.binhluanchude.data)
   // const chudes = useSelector(state => state.chudes.chude.data)
-  const binh = []
-  binhluancd.forEach(binhluan => {
-    if(binh.indexOf(binhluan) !== -1){
-      binh.push(binhluan)
-    }
-  })
+  // const binh = []
+  // binhluancd.forEach(binhluan => {
+  //   if(binh.indexOf(binhluan) !== -1){
+  //     binh.push(binhluan)
+  //   }
+  // })
   const chude = chudes.map(chude=>chude.chuDe)
-  const arr = []
-  chude.forEach(chude => {
-    const kq = binhluancd.filter(binhluan => binhluan.Chude.chuDe === chude)
-    arr.push(kq);
-  })
+  const arr = chude.map(chude => binhluancd.filter(binhluan => binhluan.Chude.chuDe === chude))
   const d = arr.map(itema => {
     const testb = itema.map(item=>item.binhluanId)
     let test = itema.filter((item,index)=> {
@@ -66,7 +62,7 @@ function Bieudo() {
     ],
   };
 
-  const options = {
+  const options1 = {
     responsive: true,
     plugins: {
       legend: {
@@ -74,14 +70,26 @@ function Bieudo() {
       },
       title: {
         display: true,
-        text: 'Chart.js Bar Chart',
+        text: 'COMMENTS BY CATEGORY & POLARITY',
+      },
+    },
+  };
+  const options2 = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'topic.polarity',
       },
     },
   };
   // Process data chart positive and negative 
   const labels = chude;
-  const blcdPostive = arr.map(blcd => blcd.filter(item=>item.Binhluan.analyzeComment === 'Positive').length)
-  const blcdNegative = arr.map(blcd => blcd.filter(item=>item.Binhluan.analyzeComment === 'Negative').length)
+  const blcdPostive = arr.map(blcd => blcd.filter(item=>item.analyzeCmt === 'Positive').length)
+  const blcdNegative = arr.map(blcd => blcd.filter(item=>item.analyzeCmt === 'Negative').length)
   const data1 = {
     labels,
     datasets: [
@@ -119,42 +127,48 @@ function Bieudo() {
     ],
   };
   return (
-    <div style={{ display: "flex" ,"flex-wrap": "wrap", "margin": "10px" }}>
-      <div style={{ width: 300 }}>
-        <Pie
-          data={data}
-          width={300}
-          height={300}
-          options={{ 
-            plugins: {
-              title: {
-                display: true,
-                text: 'Positive'
+    <div style = {{margin: "16px 32px"}}>
+      <div>
+        <h2 style = {{color: "#ccc", 'font-size': '1.5rem'}}>CATEGORIES</h2>
+        <h1 style = {{color: "#000", 'font-size': '1.3rem'}}>COMMENTS BY CATEGORY</h1> 
+      </div>
+      <div style={{ display: "flex" ,"flex-wrap": "wrap", "margin": "10px" }}>
+        <div style={{ width: 300 }}>
+          <Pie
+            data={data}
+            width={300}
+            height={300}
+            options={{ 
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'CATEGORY'
+                }
               }
-            }
-          }}
-        />
-      </div>
-      <div style={{ width: 500  }}>
-        <Bar
-          data={data1}
-          options={options}
-        />
-        Positive
-      </div>
-      <div style={{ width: 500  }}>
-        <Bar
-          data={data3}
-          options={options}
-        />
-        Negative
-      </div>
-      <div style={{ width: 500  }}>
-        <Bar
-          data={data2}
-          options={options}
-        />
-        Negative
+            }}
+          />
+        </div>
+        <div style={{ width: 500  }}>
+          <Bar
+            data={data1}
+            options={options1}
+          />
+          Positive
+        </div>
+        <div style={{ width: 500  }}>
+          <Bar
+            data={data3}
+            options={options1}
+          />
+          Negative
+        </div>
+        <div style={{ width: 500  }}>
+          <Bar
+            data={data2}
+            options={options2}
+          />
+          Negative
+        </div>
       </div>
     </div>
   );

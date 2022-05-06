@@ -73,7 +73,7 @@ const postHoaDonCaNhan = (dataObj) => {
   req.write(data);
   req.end();
 }
-const talkToChatbot = async (message) => {
+const talkToChatbot = async (message, userId) => {
   http.get('http://localhost:666/users', (resp) => {
 
     let result = 0;
@@ -143,7 +143,7 @@ const talkToChatbot = async (message) => {
     const locationEnd = response.parameters.fields.locationEnd.stringValue
     const locationStart = response.parameters.fields.locationStart.stringValue
     if (time !== '' && locationEnd !== '' && locationStart !== '') {
-        const res = await postHoaDonCaNhan({ userId: 1, noikhoihanh: locationStart, ngaykhoihanh: time.split('T')[0], diadiemdi: locationEnd, kiemduyet: 0, agree: 0 })
+        const res = await postHoaDonCaNhan({ userId, noikhoihanh: locationStart, ngaykhoihanh: time.split('T')[0], diadiemdi: locationEnd, kiemduyet: 0, agree: 0 })
         console.log(res)
     }
   }

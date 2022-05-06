@@ -55,6 +55,8 @@ function Taikhoan(props) {
         setIsModalVisible(true);
     }
     const roles = useSelector(state => state.roles.role.data);
+    const roless = [...roles]
+    roless.pop();
     const handleOk = async () => {
         var inforadmin = await taikhoanApi.getOneAdmin(userId).then(ok => {
             return ok
@@ -113,7 +115,7 @@ function Taikhoan(props) {
                 <Modal title="Cấp quyền truy cập hệ thống" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                     <Radio.Group onChange={onChangeRadio} value={value}>
                         {!roles ? '' :
-                            roles.map(ok => (
+                            roless.map(ok => (
                                 <Radio style={radioStyle} key={ok.id} value={ok.id}>
                                     <span >{ok.name === "user" ? "Người dùng" : chuhoa(ok.name)}</span>
                                 </Radio>

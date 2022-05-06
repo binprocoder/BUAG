@@ -185,10 +185,16 @@ function Danhgia(props) {
         setStateTest(getIdChude(resA.data.binhluan))
         if(resA.data.binhluan!== undefined){          
             // add vao db
-            const id = getIdChude(resA.data.binhluan);
-            id.map(async(item) => {
-                console.log(resA.data.binhluan)
-                await dispatch(addbinhluanchude({ binhluanId: data, chudeId: item}))
+            const blcd = resA.data.binhluan;
+            const blchude = blcd.match(/[^.?!]+[.!?]+[\])'"`’”]*|.+/g)
+            blchude.map(async (item)=>{
+                const analyzeComment = await monkeyLearnAnalysis(item);
+                const id = getIdChude(item);
+                if(id.length){
+                    id.map(async(items) => {
+                        await dispatch(addbinhluanchude({ binhluanId: data, chudeId: items, binhluancd: item, analyzeCmt: analyzeComment}))
+                    })
+                }
             })
         }
         return data;
