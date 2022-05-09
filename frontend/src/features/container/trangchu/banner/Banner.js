@@ -7,6 +7,7 @@ function Banner(props) {
   const anh = useSelector(state => state.anhs.anh.data);
   var banner = []
   if (anh) {
+    console.log(anh.length)
     for (let i = 0; i < anh.length; i++) {
       if (anh[i].status === +1 && anh[i].banner === +1) {
         banner.push(anh[i]);
@@ -23,13 +24,13 @@ function Banner(props) {
             </div>
           ))}
       </Carousel>
-      <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-xl-12 col-md-12">
-                            <div class="slider_text text-center">
-                                <h3 class="text_banner">Tạo tour du lịch của riêng mình</h3>
+      <div className="container">
+                    <div className="row align-items-center">
+                        <div className="col-xl-12 col-md-12">
+                            <div className="slider_text text-center">
+                                <h3 className="text_banner">Tạo tour du lịch của riêng mình</h3>
                                 <p>Tự tạo cho mình một lộ trình thú vị để có một kỳ nghỉ đáng nhớ hơn.</p>
-                                <a href="/create-tour" class="boxed-btn3">Tạo tour</a>
+                                <a href="/create-tour" className="boxed-btn3">Tạo tour</a>
                             </div>
                         </div>
                     </div>

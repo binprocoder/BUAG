@@ -5,13 +5,13 @@
     left: 10%;
     font-size: 1.2rem;
     letter-spacing: 0.1rem;
-    font-weight: 700;
+    /* font-weight: 700; */
     text-shadow: #000000 1px 0 10px;
     font-family: "Rubik", sans-serif;
   }
   .content_tour:hover{
     position: absolute;
-    color: rgb(165, 62, 62);
+    color: rgb(222, 222, 222);
     top: 80%;
     left: 10%;
     font-size: 1.2rem;

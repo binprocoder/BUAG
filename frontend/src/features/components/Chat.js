@@ -32,41 +32,32 @@ const Chat = () => {
     Axios
       .post('http://localhost:666/chatbot', data)
       .then((response) => {
-        // console.log(response.data['message']['parameters']['fields']['keySearch']['stringValue"'])
+        if (response.data['message'].toString().includes("Thời tiết hiện tại ở")) {
+          const responseWeather = {
+            text: response.data['message'],
+            isBot:true
+          }
+          setResponses((responses) => [...responses, responseWeather])
+        }
         const responseData = {
           text:
+            (((response.data['message']['intent']['displayName'] === "Action and Parameters") &&
+              localStorage.getItem("token")==null)
+              && "Bạn cần đăng nhập vào hệ thống, Nếu chưa có tài khoản, bạn có thể đăng kí tài khoản trên chatbot"
+            )
+            ||
             (response.data['message']['fulfillmentText'] !== ''
               ? response.data['message']['fulfillmentText']
-              : "Sorry, I can't get it. Can you please repeat once?")
-            || (response.data['message'] !== ''
-              ? response.data['message']
-              : "Sorry, I can't get it. Can you please repeat once?")
+              : "Xin lỗi, Tôi không hiểu!. Vui lòng nhập lại lần nữa ?")
             || (response.data['message']['intent']['displayName'] === "SearchTour"
               && response.data['message']['fulfillmentText']
-             )
+            )
           ,
           isBot: true,
 
         }
-        // if (response.data['message']['fulfillmentText'] === 'Công ty có các dịch vụ tour như: + Du lịch tham quan + Du lịch Ẩm thực + Du lịch Xanh')
-        //   console.log("âsasas")
-        // {
-        //   for (var i = 0; i < card.length; i++) {
-
-        //     if (response.data['message']["queryText"].toString().includes(card[i].Loaitours[0].name)) {
-        //       cardSearch.push({
-        //         name: card[i].name,
-        //         avatar: card[i].avatar,
-        //         gianguoilon: card[i].gianguoilon
-        //       })
-        //     }
-        //   }
-        //   setCard(cardSearch)
-        //   setCheck(true)
-        // } Hãy nhập tour mà bạn tìm kiếm! Thời tiết hiện tại ở
-        if(responseData.text.includes("Thời tiết hiện tại ở"))
-        {
-          console.log("check",responseData.text.includes("Thời tiết hiện tại ở"))
+        if (response.data['message'].toString().includes("Thời tiết hiện tại ở")) {
+          console.log("aaa")
         }
         else {
           setCard(cards)
@@ -87,8 +78,7 @@ const Chat = () => {
           }
 
         }
-        if (response.data['message']['fulfillmentText'] === 'Tôi sẽ gợi ý các tour  của công ty chúng tôi hiện có')
-        {
+        if (response.data['message']['fulfillmentText'] === 'Tôi sẽ gợi ý các tour  của công ty chúng tôi hiện có') {
           setCard(cards)
           setCheck(false)
           for (var i = 0; i < card.length; i++) {
@@ -105,7 +95,7 @@ const Chat = () => {
               setCheck(true)
             }
           }
-          console.log("checkhienco",cardSearch)
+          console.log("checkhienco", cardSearch)
         }
         else if (response.data['message']['fulfillmentText'] === 'Tôi sẽ gợi ý một số tour trong nước của công ty chúng tôi') {
           // setCheck(true)
@@ -125,7 +115,7 @@ const Chat = () => {
               setCheck(true)
             }
           }
-          console.log("checktrongnuoc",cardSearch)
+          console.log("checktrongnuoc", cardSearch)
         }
         else if (response.data['message']['fulfillmentText'] === 'Tôi sẽ gợi ý một số tour ở nước ngoài của công ty chúng tôi') {
           console.log("ok nuoc ngoài")
@@ -145,7 +135,7 @@ const Chat = () => {
               setCheck(true)
             }
           }
-          console.log("checknogainuoc",cardSearch)
+          console.log("checknogainuoc", cardSearch)
         }
         console.log(card)
         console.log(response.data)

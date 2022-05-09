@@ -30,6 +30,7 @@ body {
   border: none;
   background-color: #dadada!important;
   outline-color:#dadada;
+  width: 430px;
 }
 .enter_chatbot,
 .enter_chatbot:focus-visible {
@@ -99,10 +100,10 @@ body {
   transition: opacity 300ms ease-in;
 }
 .heading span {
-  font-size: 2rem;
+  font-size: 1.3rem;
   padding-top: 2rem;
   text-transform: uppercase;
-  font-family: "Rubik", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 .heading p {
   font-size: 1.1rem;

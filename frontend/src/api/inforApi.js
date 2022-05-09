@@ -4,6 +4,7 @@ class InforApi {
     infor = () => {
         const url = '/checkuser';
         if (localStorage.getItem("token")) {
+            console.log(localStorage.getItem("token"))
             return axiosClient.get(url);
         } else {
             return '';
