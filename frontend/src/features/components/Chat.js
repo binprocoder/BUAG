@@ -3,7 +3,7 @@ import Axios from 'axios'
 import Messages from './Messages'
 import Card from './Card'
 import {useSelector} from 'react-redux'
-const cards = [{}]
+const cards = []
 fetch('http://localhost:666/tours')
   .then(response => response.json())
   .then(data => {
@@ -18,16 +18,15 @@ fetch('http://localhost:666/tours')
       })
     }
   });
+
 const Chat = () => {
   let user = useSelector(state=> state.infor.infor.data)
-
   const [responses, setResponses] = useState([])
   const [currentMessage, setCurrentMessage] = useState('')
   const [check, setCheck] = useState(false)
   const [card, setCard] = useState(cards)
-  const cardSearch = [{}]
+  const cardSearch = []
   const checkSearch = false;
-  console.log(user)
   if(!user){
     user = {
       id: -1
@@ -38,11 +37,20 @@ const Chat = () => {
       message,
       userId: user.id
     }
-
     Axios
       .post('http://localhost:666/chatbot', data)
       .then((response) => {
-        if (response.data['message'].toString().includes("Thời tiết hiện tại ở")) {
+        console.log(response.data['message'])
+        if (response.data['message'].toString().indexOf('undefined°C') !== -1) {
+          console.log("ok")
+          const responseWeather = {
+            text: "Vui lòng nhập thời tiết và địa điểm mà bạn muốn biết!",
+            isBot:true
+          }
+          setResponses((responses) => [...responses, responseWeather])
+        }
+        else if(response.data['message'].toString().includes('Thời tiết hiện tại ở'))
+        {
           const responseWeather = {
             text: response.data['message'],
             isBot:true
