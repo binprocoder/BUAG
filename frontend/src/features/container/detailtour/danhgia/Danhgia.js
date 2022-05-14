@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addbinhluan, binhluanData, updatebinhluan, findbinhluan } from '../../admin/Binhluan/binhluanSlice';
 import { addbinhluanchude, binhluanchudeData } from '../../admin/Binhluanchude/binhluanchudeSlice';
 import binhluanApi from '../../../../api/binhluanApi'
+import { info } from 'actions-on-google/dist/common';
 const { monkeyLearnAnalysis } = require("../../../utils/monkeylearn");
 var isSubmitComment = false;
 
@@ -30,6 +31,14 @@ function Danhgia(props) {
     const taikhoans = useSelector(state => state.taikhoan.user.data);
     const load = useSelector(state => state.binhluans.loading);
     const phanhois = useSelector(state => state.phanhois.phanhoi.data);
+    const hoadons = useSelector(state => state.hoadons.hoadon.data);
+    let checkHoadon 
+    if(infor !== undefined){
+        checkHoadon = hoadons.filter(hd=>{
+            return hd.userId === infor.id && Number(props.id) === hd.tourId
+        })
+
+    }
     const { binhluan, star, status } = state
     const dispatch = useDispatch();
     const danhgiatext = e => {
@@ -297,7 +306,7 @@ function Danhgia(props) {
                     </div>
                 </div>
                 <div className="container"><hr /></div>
-                {checklogin === undefined ? '' :
+                {checklogin === undefined || checkHoadon.length === 0? '' :
                     <div className="container">
                         <h3>Đánh giá tour</h3>
                         <div className="container mb-5">
