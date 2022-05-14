@@ -48,7 +48,7 @@ function Tournuocngoai(props) {
       <div className="heading text-center">
         <span>du lịch nước ngoài</span>
         <div className="hr"></div>
-        <p className="mb-4">
+        <p className="mb-4 mt-2">
           Du lịch nước ngoài đem lại cho mọi người sự mới mẻ về một đất nước khác và hiểu rõ về các quốc gia hơn.
       </p>
       </div>

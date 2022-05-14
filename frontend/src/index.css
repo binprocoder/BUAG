@@ -30,6 +30,7 @@ body {
   border: none;
   background-color: #dadada!important;
   outline-color:#dadada;
+  width: 427px;
 }
 .enter_chatbot,
 .enter_chatbot:focus-visible {
@@ -50,17 +51,22 @@ body {
 }
 .btnfloat {
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgb(0, 0, 0);
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-  margin: 2px;
-  z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(126 126 126);
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    margin: 2px;
+    z-index: 1;
+    /* overflow: hidden; */
+    /* outline-color: white; */
+    background-color: #fdfdfd00;
+    border: none;
+    font-size:30px;
 }
 
 .scrollbar-w-2::-webkit-scrollbar {
@@ -99,13 +105,13 @@ body {
   transition: opacity 300ms ease-in;
 }
 .heading span {
-  font-size: 2rem;
+  font-size: 1.5rem;
   padding-top: 2rem;
   text-transform: uppercase;
   font-family: "Rubik", sans-serif;
 }
 .heading p {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 .hr {
   height: 4px;
@@ -188,7 +194,6 @@ svg{
   overflow-x: auto;
   scroll-behavior: smooth;
   width: 450px;
-  /* width: 292px; */
 }
 
 .product-container::-webkit-scrollbar {
@@ -350,3 +355,7 @@ svg{
   grid-column: span 2;
   margin-bottom: 10px;
 }
+
+
+
+

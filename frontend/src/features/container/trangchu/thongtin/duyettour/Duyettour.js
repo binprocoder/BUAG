@@ -53,6 +53,11 @@ export default function Duyettour() {
                                         {(ok.giatien).toLocaleString()} vnđ
                                     </div>
                                 </div>
+                                <div className="duyettour--form">
+                                    <div className="luuytour">
+                                        {(ok.luuy)}
+                                    </div>
+                                </div>
                                 <div className="btn__tour">
                                     <Popconfirm title="Bạn có chắc chắn？" onConfirm={() => { dongy(ok.id) }} icon={<QuestionCircleOutlined style={{ color: 'green' }} />}>
                                         <Button color="primary" variant="contained" className="mr-1">Đồng ý</Button>
