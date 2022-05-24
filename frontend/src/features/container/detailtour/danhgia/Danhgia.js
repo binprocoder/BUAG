@@ -39,6 +39,13 @@ function Danhgia(props) {
         })
 
     }
+    let checkBinhluan = useSelector(state => state.binhluans.binhluan.data);
+    let checkBinhluans
+    if(infor !== undefined){
+        checkBinhluans = checkBinhluan.filter(bl => {
+            return bl.userId === infor.id && Number(props.id) === bl.tourId
+        })
+    }
     const { binhluan, star, status } = state
     const dispatch = useDispatch();
     const danhgiatext = e => {
@@ -306,8 +313,11 @@ function Danhgia(props) {
                     </div>
                 </div>
                 <div className="container"><hr /></div>
-                {checklogin === undefined || checkHoadon.length === 0? '' :
-                    <div className="container">
+                {checklogin === undefined || checkHoadon.length === 0 ? '' : checkBinhluans.length !== 0 ? 
+                <div className="container">
+                  <h3>Bạn đã đánh giá</h3>  
+                </div>
+                :    <div className="container">
                         <h3>Đánh giá tour</h3>
                         <div className="container mb-5">
                             <div>
